@@ -7,7 +7,7 @@
 
 {% block content %}
   {{ parent() }}
-  <a class="btn btn-primary" href="http://localhost/proyectos/2DAW%20-%20DWES%20-%20PHP/09%20-%20controladores/?controller=users&action=create">Agregar usuario</a>
+  <a class="btn btn-primary" href="http://localhost/2daw-clase/?controller=users&action=create">Agregar usuario</a>
   {# Condicionales #}
   {#
   {% if mensaje %}
@@ -41,9 +41,9 @@
           <td>{{ u.id_rol }}</td>
           <td>{{ u.password }}</td>
           <td>
-            <a class="btn btn-success" href="http://localhost/proyectos/2DAW%20-%20DWES%20-%20PHP/09%20-%20controladores/?controller=users&action=show&id={{ u.id }}">Ver</a>
-            <a class="btn btn-secondary" href="http://localhost/proyectos/2DAW%20-%20DWES%20-%20PHP/09%20-%20controladores/?controller=users&action=edit&id={{ u.id }}">Editar</a>
-            <a class="btn btn-danger" href="http://localhost/proyectos/2DAW%20-%20DWES%20-%20PHP/09%20-%20controladores/?controller=users&action=delete&id={{ u.id }}">Eliminar</a>
+            <a class="btn btn-success" href="http://localhost/2daw-clase/?controller=users&action=show&id={{ u.id_usuario }}">Ver</a>
+            <a class="btn btn-secondary" href="http://localhost/2daw-clase/?controller=users&action=edit&id={{ u.id_usuario }}">Editar</a>
+            <a class="btn btn-danger" href="http://localhost/2daw-clase/?controller=users&action=delete&id={{ u.id_usuario }}">Eliminar</a>
           </td>
         </tr>
       {% else %}

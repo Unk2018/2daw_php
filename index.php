@@ -29,7 +29,7 @@ if (isset($_GET['controller'])) {
     debo comprobar que existe una clase con ese nombre */
     if (class_exists($controller)) {
         // ucfirst() -> UpperCase First
-        $controller_object = new $controller(); //UsersController
+        $controller_object = new $controller(); // UsersController
 
         /* Creo un objeto de la clase $controller y procedo a comprobar el método de la URL */
         if (isset($_GET['action'])) {
@@ -46,6 +46,10 @@ if (isset($_GET['controller'])) {
     ¿Número de error que debería enviar? ¿3XX? ¿4XX?
     ¿Enviar a un controlador por defecto?
     */
+
+    echo "Error, no existe";
+    // No hay un valor controller por defecto
+    echo $_GET['controller'];
 }
 
 ?>

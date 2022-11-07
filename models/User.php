@@ -1,6 +1,7 @@
 <?php
 require 'config/Database.php';
 require 'models/Model.php';
+
 class User implements Model
 {
     private $id_usuario;
@@ -29,14 +30,14 @@ class User implements Model
         return $this->email;
     }
 
-    function getPassword()
-    {
-        return $this->password;
-    }
-
     function getId_rol()
     {
         return $this->id_rol;
+    }
+
+    function getPassword()
+    {
+        return $this->password;
     }
 
     function setId_usuario($id_usuario)
@@ -54,14 +55,14 @@ class User implements Model
         $this->email = $email;
     }
 
-    function setPassword($password)
-    {
-        $this->password = password_hash($password, PASSWORD_BCRYPT, ['cont' => 4]);
-    }
-
     function setId_rol($id_rol)
     {
         $this->id_rol = $id_rol;
+    }
+
+    function setPassword($password)
+    {
+        $this->password = password_hash($password, PASSWORD_BCRYPT, ['cont' => 4]);
     }
 
     // Me va a devolver todos los elementos
@@ -73,7 +74,7 @@ class User implements Model
     }
 
     // Me devuelve el elemento filtrado por id
-    public function findById()
+    public function findById($id_usuario)
     {
         $db = Database::conectar();
         $findById = $db->query("SELECT * FROM usuario WHERE id_usuario = " . $this->id_usuario);
@@ -86,8 +87,8 @@ class User implements Model
         $db = Database::conectar();
         // En las dobles comillas, se puede poner lo del $this sin los  ' . ' ya que te lo cogen
         // En las comillas simples no te lo coge
-        $save = $db->query("INSERT INTO usuario (nombre, email, password, id_rol) 
-        VALUES ('$this->nombre', '$this->apellidos', '$this->email', '$this->password', '$this->id_rol')");
+        $save = $db->query("INSERT INTO usuario (nombre, email, id_rol, password) 
+        VALUES ('$this->nombre', '$this->email', '$this->id_rol', '$this->password')");
         return $save;
     }
 
@@ -95,12 +96,12 @@ class User implements Model
     public function update()
     {
         $db = Database::conectar();
-        $update = $db->query("UPDATE usuario SET nombre='$this->nombre', email='$this->email', password='$this->password', id_rol='$this->id_rol'");
+        $update = $db->query("UPDATE usuario SET nombre='$this->nombre', email='$this->email', id_rol='$this->id_rol', password='$this->password'");
         return $update;
     }
 
     // Eliminar en la base de datos filtrando por id
-    public function delete()
+    public function delete($id_usuario)
     {
         $db = Database::conectar();
         $delete = $db->query("DELETE FROM usuario WHERE id_usuario=$this->id_usuario");

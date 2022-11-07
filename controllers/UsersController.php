@@ -37,7 +37,7 @@ class UsersController
         $user = new User();
         echo $GLOBALS["twig"]->render(
             'users/show.twig',
-            ['user' => $user->findById($_GET['id_usuario'])]
+            ['user' => $user->findById($_GET['id'])]
         );
     }
 
@@ -49,7 +49,7 @@ class UsersController
         $user = new User();
         echo $GLOBALS["twig"]->render(
             'users/edit.twig',
-            ['user' => $user->findById($_GET['id_usuario'])]
+            ['user' => $user->findById($_GET['id'])]
         );
     }
 
@@ -64,7 +64,7 @@ class UsersController
         $user->setId_rol($_POST['id_rol']);
         $user->setPassword($_POST['password']);
         $user->save($user);
-        header("Location: http://localhost/proyectos/2DAW%20-%20DWES%20-%20PHP/09%20-%20controladores/?controller=users&action=index");
+        header("Location: http://localhost/2daw-clase/?controller=users&action=index");
     }
 
     /**
@@ -79,7 +79,7 @@ class UsersController
         $user->setId_rol($_POST['id_rol']);
         $user->setPassword($_POST['password']);
         $user->update();
-        header("Location: http://localhost/proyectos/2DAW%20-%20DWES%20-%20PHP/09%20-%20controladores/?controller=users&action=index");
+        header("Location: http://localhost/2daw-clase/?controller=users&action=index");
     }
     /**
      * 
@@ -87,7 +87,7 @@ class UsersController
     public function delete()
     {
         $user = new User();
-        $user->delete($_GET['id_usuario']);
-        header("Location: http://localhost/proyectos/2DAW%20-%20DWES%20-%20PHP/09%20-%20controladores/?controller=users&action=index");
+        $user->delete($_GET['id']);
+        header("Location: http://localhost/2daw-clase/?controller=users&action=index");
     }
 }
