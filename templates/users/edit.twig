@@ -1,0 +1,41 @@
+{% block title %}
+  EDIT
+{% endblock %}
+
+{% block header %}
+  <h1>EDIT</h1>
+{% endblock %}
+
+{% block content %}
+  {{ parent() }}
+  <form action="http://localhost/proyectos/2DAW%20-%20DWES%20-%20PHP/09%20-%20controladores/?controller=users&action=update" method="POST">
+    <div class="row m-0 p-0 justify-content-center mb-3">
+      <div class="col-6 row">
+        <div class="mb-3">
+          <input type="hidden" class="form-control" id="id" name="id" value="{{ user[0] }}" aria-describedby="id" />
+        </div>
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="nombre" name="nombre" value="{{ user[1] }}" aria-describedby="nombre" />
+          <div id="nombre" class="form-text">Escribe nombre.</div>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">email</label>
+          <input type="email" class="form-control" id="email" name="email" value="{{ user[2] }}" aria-describedby="email" />
+          <div id="email" class="form-text">Escribe email.</div>
+        </div>
+        <div class="mb-3">
+          <label for="id_rol" class="form-label">Id_rol</label>
+          <input type="text" class="form-control" id="id_rol" value="{{ user[3] }}" name="id_rol" aria-describedby="id_rol" />
+          <div id="id_rol" class="form-text">Escribe Id_rol.</div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">password</label>
+          <input type="password" class="form-control" id="password" name="password" value="{{ user[4] }}" aria-describedby="password" />
+          <div id="password" class="form-text">Escribe password.</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
+{% endblock %}

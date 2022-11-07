@@ -1,0 +1,40 @@
+{% extends 'plantilla.twig' %}
+
+{% block title %}
+  Create
+{% endblock %}
+
+{% block content %}
+  <a class="btn btn-primary" href="index.php">Index</a>
+
+  <!-- action = URL?controller=user&action=save -->
+  <!-- Eso quiere decir que llama al controlador user e intenta ejecutar el método save -->
+  <form action="http://localhost/proyectos/2DAW%20-%20DWES%20-%20PHP/09%20-%20controladores/?controller=users&action=save" method="POST">
+    <div class="row m-0 p-0 justify-content-center mb-3">
+      <div class="col-6 row">
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <!-- Cogerá el valor por la id del input -->
+          <input type="text" class="form-control" id="nombre" name="nombre" aria-describedby="nombre" />
+          <div id="nombre" class="form-text">Escribe nombre.</div>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" name="email" aria-describedby="email" />
+          <div id="email" class="form-text">Escribe email.</div>
+        </div>
+        <div class="mb-3">
+          <label for="id_rol" class="form-label">Id_rol</label>
+          <input type="text" class="form-control" id="id_rol" name="id_rol" aria-describedby="id_rol" />
+          <div id="id_rol" class="form-text">Escribe Id_rol.</div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" name="password" aria-describedby="password" />
+          <div id="password" class="form-text">Escribe password.</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
+{% endblock %}
