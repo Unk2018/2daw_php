@@ -5,17 +5,20 @@ require_once 'vendor/autoload.php';
 
 class UsersController
 {
-
     /**
      * 
      */
-    public function index()
+    public static function index()
     {
-        $user = new User();
-        echo $GLOBALS["twig"]->render(
-            'users/index.twig',
-            ['users' => $user->findAll()]
-        );
+        if (isset($_SESSION['identity'])) {
+            $user = new User();
+            echo $GLOBALS["twig"]->render(
+                'users/index.twig',
+                ['users' => $user->findAll()]
+            );
+        } else {
+            header('Location: http://localhost/2daw-clase/?controller=auth&action=login');
+        }
     }
 
     /**
@@ -23,10 +26,14 @@ class UsersController
      */
     public function create()
     {
-        $user = new User();
-        echo $GLOBALS["twig"]->render(
-            'users/create.twig'
-        );
+        if (isset($_SESSION['identity'])) {
+            $user = new User();
+            echo $GLOBALS["twig"]->render(
+                'users/create.twig'
+            );
+        } else {
+            header('Location: http://localhost/2daw-clase/?controller=auth&action=login');
+        }
     }
 
     /**
@@ -34,11 +41,15 @@ class UsersController
      */
     public function show()
     {
-        $user = new User();
-        echo $GLOBALS["twig"]->render(
-            'users/show.twig',
-            ['user' => $user->findById($_GET['id'])]
-        );
+        if (isset($_SESSION['identity'])) {
+            $user = new User();
+            echo $GLOBALS["twig"]->render(
+                'users/show.twig',
+                ['user' => $user->findById($_GET['id'])]
+            );
+        } else {
+            header('Location: http://localhost/2daw-clase/?controller=auth&action=login');
+        }
     }
 
     /**
@@ -46,11 +57,15 @@ class UsersController
      */
     public function edit()
     {
-        $user = new User();
-        echo $GLOBALS["twig"]->render(
-            'users/edit.twig',
-            ['user' => $user->findById($_GET['id'])]
-        );
+        if (isset($_SESSION['identity'])) {
+            $user = new User();
+            echo $GLOBALS["twig"]->render(
+                'users/edit.twig',
+                ['user' => $user->findById($_GET['id'])]
+            );
+        } else {
+            header('Location: http://localhost/2daw-clase/?controller=auth&action=login');
+        }
     }
 
     /**

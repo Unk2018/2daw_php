@@ -17,6 +17,8 @@ $twig = new \Twig\Environment($loader);
 $GLOBALS["twig"];
 
 include 'controllers/UsersController.php';
+include 'controllers/AuthController.php';
+session_start();
 
 /* Primero comprueba que controlador voy a cargar por URL */
 
@@ -39,6 +41,14 @@ if (isset($_GET['controller'])) {
         }
     }
 } else {
+    /*
+        Si no existe un controller en el URL, pongo una acción por defecto
+    */
+    // $usersController = new UsersController();
+    // $usersController->index();
+
+    // Mi acción por defecto es lanzar mi index.twig como página de caída
+    echo $twig->render('index.twig');
     /* Si no existe el parámetro controller en la URL, tengo que hacer algo
     Enviar un error.
     Redirigir a alguna vista.
@@ -47,9 +57,9 @@ if (isset($_GET['controller'])) {
     ¿Enviar a un controlador por defecto?
     */
 
-    echo "Error, no existe";
+    // echo "Error, no existe";
     // No hay un valor controller por defecto
-    echo $_GET['controller'];
+    // echo $_GET['controller'];
 }
 
 ?>

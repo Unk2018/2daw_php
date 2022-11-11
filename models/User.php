@@ -77,7 +77,7 @@ class User implements Model
     public function findById($id_usuario)
     {
         $db = Database::conectar();
-        $findById = $db->query("SELECT * FROM usuario WHERE id_usuario = " . $this->id_usuario);
+        $findById = $db->query("SELECT * FROM usuario WHERE id_usuario = " .$id_usuario);
         return $findById;
     }
 
@@ -96,7 +96,9 @@ class User implements Model
     public function update()
     {
         $db = Database::conectar();
-        $update = $db->query("UPDATE usuario SET nombre='$this->nombre', email='$this->email', id_rol='$this->id_rol', password='$this->password'");
+        $update = $db->query("UPDATE usuario SET nombre='$this->nombre', email='$this->email', id_rol='$this->id_rol', password='$this->password' WHERE id_usuario=' . $this->id_usuario'");
+        var_dump($update);
+        exit();
         return $update;
     }
 
@@ -104,7 +106,47 @@ class User implements Model
     public function delete($id_usuario)
     {
         $db = Database::conectar();
-        $delete = $db->query("DELETE FROM usuario WHERE id_usuario=$this->id_usuario");
+        $delete = $db->query("DELETE FROM usuario WHERE id_usuario=$id_usuario");
         return $delete;
+    }
+
+    /* Comprueba los datos introducido. En caso correcto, devuelve usuario. Si no, devuelve false */
+    public function login()
+    {
+        $db = Database::conectar();
+
+        // Mete a una variable usuario el resultado de la query
+        $user = $db->query("SELECT * FROM usuario WHERE email = '$this->email'");
+
+        // Si el usuario existe y solo hay 1, entonces verificará la password
+        if ($user && $user->num_rows == 1) {
+            /* Método fetch_object() me devuelve los valores recogidos de mi base de datos en un 
+            formato objeto */
+            $user = $user->fetch_object();
+
+            /* Verifica un string con otro encriptado. En este caso se comprueba la password
+            introducida con la de la base de datos. Devuelve un booleano */
+            $verify = password_verify($this->password, $user->password);
+        }
+
+        var_dump($this->password);
+        var_dump("<br/>");
+        var_dump("<br/>");
+        var_dump($user->password);
+        var_dump("<br/>");
+        var_dump("<br/>");
+        var_dump(password_hash($this->password, PASSWORD_BCRYPT, ['cont' => 4]));
+        var_dump("<br/>");
+        var_dump("<br/>");
+        var_dump(password_verify(password_hash($this->password, PASSWORD_BCRYPT, ['cont' => 4]), password_hash($this->password, PASSWORD_BCRYPT, ['cont' => 4])));
+        
+        var_dump($verify);
+        exit();
+        if ($verify) {
+            // Password coincide y debe hacer login
+            return $user;
+        } else {
+            return false;
+        }
     }
 }

@@ -3,6 +3,12 @@
 }
 
 .contenedorCentro {
-    margin-left: 10%;
-    margin-bottom: 10%;
+    width: 88%;
+    font-size: 14px;
+    margin-left: 5%;
+    margin-bottom: 5%;
+}
+
+th {
+    font-size: 16px;
 }

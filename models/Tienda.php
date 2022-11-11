@@ -4,80 +4,58 @@ require 'models/Model.php';
 
 class Tienda implements Model
 {
-    private $id_usuario;
-    private $nombre;
-    private $email;
-    private $id_rol;
-    private $password;
+    private $id_tienda;
+    private $id_producto;
+    private $cantidad;
 
     // Class constructor
     public function __construct()
     {
     }
 
-    function getId_usuario()
+    function getId_tienda()
     {
-        return $this->id_usuario;
+        return $this->id_tienda;
     }
 
-    function getNombre()
+    function getId_producto()
     {
-        return $this->nombre;
+        return $this->id_producto;
     }
 
-    function getEmail()
+    function getCantidad()
     {
-        return $this->email;
+        return $this->cantidad;
     }
 
-    function getId_rol()
+    function setId_tienda($id_tienda)
     {
-        return $this->id_rol;
+        $this->id_tienda = $id_tienda;
     }
 
-    function getPassword()
+    function setId_producto($id_producto)
     {
-        return $this->password;
+        $this->id_producto = $id_producto;
     }
 
-    function setId_usuario($id_usuario)
+    function setCantidad($cantidad)
     {
-        $this->id_usuario = $id_usuario;
-    }
-
-    function setNombre($nombre)
-    {
-        $this->nombre = $nombre;
-    }
-
-    function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-    function setId_rol($id_rol)
-    {
-        $this->id_rol = $id_rol;
-    }
-
-    function setPassword($password)
-    {
-        $this->password = password_hash($password, PASSWORD_BCRYPT, ['cont' => 4]);
+        $this->cantidad = $cantidad;
     }
 
     // Me va a devolver todos los elementos
     public function findAll()
     {
         $db = Database::conectar();
-        $findAll = $db->query("SELECT * FROM usuario");
+        $findAll = $db->query("SELECT * FROM tienda");
         return $findAll;
     }
 
     // Me devuelve el elemento filtrado por id
-    public function findById($id_usuario)
+    public function findById($id_tienda)
     {
         $db = Database::conectar();
-        $findById = $db->query("SELECT * FROM usuario WHERE id_usuario = " . $this->id_usuario);
+        $findById = $db->query("SELECT * FROM tienda WHERE id_tienda = " . $this->id_tienda);
         return $findById;
     }
 
@@ -87,8 +65,8 @@ class Tienda implements Model
         $db = Database::conectar();
         // En las dobles comillas, se puede poner lo del $this sin los  ' . ' ya que te lo cogen
         // En las comillas simples no te lo coge
-        $save = $db->query("INSERT INTO usuario (nombre, email, id_rol, password) 
-        VALUES ('$this->nombre', '$this->email', '$this->id_rol', '$this->password')");
+        $save = $db->query("INSERT INTO tienda (id_producto, cantidad) 
+        VALUES ('$this->id_producto', '$this->cantidad')");
         return $save;
     }
 
@@ -96,15 +74,15 @@ class Tienda implements Model
     public function update()
     {
         $db = Database::conectar();
-        $update = $db->query("UPDATE usuario SET nombre='$this->nombre', email='$this->email', id_rol='$this->id_rol', password='$this->password'");
+        $update = $db->query("UPDATE tienda SET id_producto='$this->id_producto', cantidad='$this->cantidad'");
         return $update;
     }
 
     // Eliminar en la base de datos filtrando por id
-    public function delete($id_usuario)
+    public function delete($id_tienda)
     {
         $db = Database::conectar();
-        $delete = $db->query("DELETE FROM usuario WHERE id_usuario=$this->id_usuario");
+        $delete = $db->query("DELETE FROM tienda WHERE id_tienda=$this->id_tienda");
         return $delete;
     }
 }

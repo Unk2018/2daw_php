@@ -6,8 +6,9 @@
 {% endblock %}
 
 {% block content %}
-  {{ parent() }}
   <a class="btn btn-primary" href="http://localhost/2daw-clase/?controller=users&action=create">Agregar usuario</a>
+  <a href="http://localhost/2daw-clase/?controller=auth&action=login" class="btn btn-primary">Login</a>
+  <a href="#" class="btn btn-primary">Register</a>
   {# Condicionales #}
   {#
   {% if mensaje %}
@@ -20,7 +21,7 @@
   <p>{{ numero }}</p>
 #}
 
-  <table class="table table-striped text-center w-75 mt-4 mb-4 contenedorCentro">
+  <table class="table table-striped text-center w-75 mt-4 contenedorCentro">
     <thead>
       <tr>
         <th scope="col">#</th>
