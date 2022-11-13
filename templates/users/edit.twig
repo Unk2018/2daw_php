@@ -14,26 +14,26 @@
     <div class="row m-0 p-0 justify-content-center mb-3">
       <div class="col-6 row">
         <div class="mb-3">
-          <input type="hidden" class="form-control" id="id" name="id" value="{{ user[0] }}" aria-describedby="id" />
+          <input type="hidden" class="form-control" id="id" name="id" value="{{ user.id_usuario }}" aria-describedby="id" />
         </div>
         <div class="mb-3">
           <label for="nombre" class="form-label">Nombre</label>
-          <input type="text" class="form-control" id="nombre" name="nombre" value="{{ user[1] }}" aria-describedby="nombre" />
+          <input type="text" class="form-control" id="nombre" name="nombre" value="{{ user.nombre }}" aria-describedby="nombre" />
           <div id="nombre" class="form-text">Escribe nombre.</div>
         </div>
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email" name="email" value="{{ user[2] }}" aria-describedby="email" />
+          <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" aria-describedby="email" />
           <div id="email" class="form-text">Escribe email.</div>
         </div>
         <div class="mb-3">
           <label for="id_rol" class="form-label">Id_rol</label>
-          <input type="text" class="form-control" id="id_rol" value="{{ user[3] }}" name="id_rol" aria-describedby="id_rol" />
+          <input type="text" class="form-control" id="id_rol" value="{{ user.id_rol }}" name="id_rol" aria-describedby="id_rol" />
           <div id="id_rol" class="form-text">Escribe Id_rol.</div>
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password" name="password" value="{{ user[4] }}" aria-describedby="password" />
+          <input type="password" class="form-control" id="password" name="password" value="{{ user.password }}" aria-describedby="password" />
           <div id="password" class="form-text">Escribe password.</div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>

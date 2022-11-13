@@ -62,7 +62,7 @@ class User implements Model
 
     function setPassword($password)
     {
-        $this->password = password_hash($password, PASSWORD_BCRYPT, ['cont' => 4]);
+        $this->password = $password;
     }
 
     // Me va a devolver todos los elementos
@@ -74,11 +74,11 @@ class User implements Model
     }
 
     // Me devuelve el elemento filtrado por id
-    public function findById($id_usuario)
+    public function findById()
     {
         $db = Database::conectar();
-        $findById = $db->query("SELECT * FROM usuario WHERE id_usuario = " . $id_usuario);
-        return $findById;
+        $findById = $db->query("SELECT * FROM usuario WHERE id_usuario =$this->id_usuario");
+        return $findById->fetch_object();
     }
 
     // Insertar en la base de datos
@@ -103,18 +103,18 @@ class User implements Model
         $db = Database::conectar();
         // Mira que los datos relevantes no estén vacíos antes de actualizar los datos
         if ($this->password != null && $this->email != null) {
-            $update = $db->query("UPDATE usuario SET nombre='$this->nombre', email='$this->email', id_rol='$this->id_rol', password='$this->password' WHERE id_usuario=' . $this->id_usuario'");
+            $update = $db->query("UPDATE usuario SET nombre='$this->nombre', email='$this->email', id_rol='$this->id_rol', password='$this->password' WHERE id_usuario='$this->id_usuario'");
         } else {
-            $update = $db->query("UPDATE usuario SET nombre='$this->nombre', email='$this->email', id_rol='$this->id_rol' WHERE id_usuario=' . $this->id_usuario'");
+            $update = $db->query("UPDATE usuario SET nombre='$this->nombre', email='$this->email', id_rol='$this->id_rol' WHERE id_usuario='$this->id_usuario'");
         }
         return $update;
     }
 
     // Eliminar en la base de datos filtrando por id
-    public function delete($id_usuario)
+    public function delete()
     {
         $db = Database::conectar();
-        $delete = $db->query("DELETE FROM usuario WHERE id_usuario=$id_usuario");
+        $delete = $db->query("DELETE FROM usuario WHERE id_usuario=$this->id_usuario");
         return $delete;
     }
 
@@ -131,16 +131,12 @@ class User implements Model
             /* Método fetch_object() me devuelve los valores recogidos de mi base de datos en un 
             formato objeto */
             $user = $user->fetch_object();
-
+            
             /* Verifica un string con otro encriptado. En este caso se comprueba la password
             introducida con la de la base de datos. Devuelve un booleano */
             $verify = password_verify($this->password, $user->password);
         }
-
-        var_dump($this->password);
-        var_dump("<br/>");
-        var_dump("<br/>");
-        exit();
+        
         if ($verify) {
             // Password coincide y debe hacer login
             return $user;

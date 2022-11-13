@@ -6,7 +6,7 @@ interface Model
     public function findAll();
 
     // Me devuelve el elemento filtrado por id
-    public function findById($id);
+    public function findById();
 
     // Insertar en la base de datos
     public function save();
@@ -15,7 +15,7 @@ interface Model
     public function update();
 
     // Eliminar en la base de datos filtrando por id
-    public function delete($id);
+    public function delete();
 }
 
 ?>

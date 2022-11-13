@@ -28,6 +28,7 @@ class AuthController
         */
         if ($user_ok && is_object($user_ok)) {
             $_SESSION['identity'] = $user_ok;
+            header('Location: http://localhost/2daw-clase/?controller=auth&action=home');
         } else {
             header('Location: http://localhost/2daw-clase/index.php');
         }
