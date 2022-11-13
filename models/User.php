@@ -77,28 +77,36 @@ class User implements Model
     public function findById($id_usuario)
     {
         $db = Database::conectar();
-        $findById = $db->query("SELECT * FROM usuario WHERE id_usuario = " .$id_usuario);
+        $findById = $db->query("SELECT * FROM usuario WHERE id_usuario = " . $id_usuario);
         return $findById;
     }
 
     // Insertar en la base de datos
     public function save()
     {
+        $save = "";
         $db = Database::conectar();
         // En las dobles comillas, se puede poner lo del $this sin los  ' . ' ya que te lo cogen
         // En las comillas simples no te lo coge
-        $save = $db->query("INSERT INTO usuario (nombre, email, id_rol, password) 
-        VALUES ('$this->nombre', '$this->email', '$this->id_rol', '$this->password')");
+        // Mira si hay datos antes de introducirlo a la base de datos
+        if ($this->password != null && $this->email != null && $this->nombre != null && $this->id_rol != null) {
+            $save = $db->query("INSERT INTO usuario (nombre, email, id_rol, password) 
+            VALUES ('$this->nombre', '$this->email', '$this->id_rol', '$this->password')");
+        }
         return $save;
     }
 
     // Actualizar en la base de datos filtrando por id
     public function update()
     {
+        $update = "";
         $db = Database::conectar();
-        $update = $db->query("UPDATE usuario SET nombre='$this->nombre', email='$this->email', id_rol='$this->id_rol', password='$this->password' WHERE id_usuario=' . $this->id_usuario'");
-        var_dump($update);
-        exit();
+        // Mira que los datos relevantes no estén vacíos antes de actualizar los datos
+        if ($this->password != null && $this->email != null) {
+            $update = $db->query("UPDATE usuario SET nombre='$this->nombre', email='$this->email', id_rol='$this->id_rol', password='$this->password' WHERE id_usuario=' . $this->id_usuario'");
+        } else {
+            $update = $db->query("UPDATE usuario SET nombre='$this->nombre', email='$this->email', id_rol='$this->id_rol' WHERE id_usuario=' . $this->id_usuario'");
+        }
         return $update;
     }
 
@@ -132,15 +140,6 @@ class User implements Model
         var_dump($this->password);
         var_dump("<br/>");
         var_dump("<br/>");
-        var_dump($user->password);
-        var_dump("<br/>");
-        var_dump("<br/>");
-        var_dump(password_hash($this->password, PASSWORD_BCRYPT, ['cont' => 4]));
-        var_dump("<br/>");
-        var_dump("<br/>");
-        var_dump(password_verify(password_hash($this->password, PASSWORD_BCRYPT, ['cont' => 4]), password_hash($this->password, PASSWORD_BCRYPT, ['cont' => 4])));
-        
-        var_dump($verify);
         exit();
         if ($verify) {
             // Password coincide y debe hacer login
