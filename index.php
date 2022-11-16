@@ -16,8 +16,11 @@ $twig = new \Twig\Environment($loader);
 
 $GLOBALS["twig"];
 
+include 'controllers/IndexController.php';
 include 'controllers/UsersController.php';
 include 'controllers/AuthController.php';
+include 'controllers/ErrorController.php';
+include 'config/Parameters.php';
 session_start();
 
 /* Primero comprueba que controlador voy a cargar por URL */
@@ -39,27 +42,25 @@ if (isset($_GET['controller'])) {
             $action = $_GET['action'];
             $controller_object->$action();
         }
+    } else {
+        /*
+        Error en el caso de no encontrar la clase o no existe
+        Lanzar error 404
+        CAMBIAR CABECERA
+        */
+        ErrorController::_404();
+
     }
 } else {
-    /*
-        Si no existe un controller en el URL, pongo una acción por defecto
-    */
-    // $usersController = new UsersController();
-    // $usersController->index();
+    // Si no existe un controller en mi url, recojo un controlador por defecto
+    // Si no existe una action en mi url, recojo una action por defecto
+    $controller_default = controller_default;    
+    $action_default = action_default;
+    $controller = new $controller_default();
+    $controller->$action_default();
 
     // Mi acción por defecto es lanzar mi index.twig como página de caída
-    echo $twig->render('index.twig');
-    /* Si no existe el parámetro controller en la URL, tengo que hacer algo
-    Enviar un error.
-    Redirigir a alguna vista.
-    
-    ¿Número de error que debería enviar? ¿3XX? ¿4XX?
-    ¿Enviar a un controlador por defecto?
-    */
-
-    // echo "Error, no existe";
-    // No hay un valor controller por defecto
-    // echo $_GET['controller'];
+    //echo $twig->render('index.twig');
 }
 
 ?>

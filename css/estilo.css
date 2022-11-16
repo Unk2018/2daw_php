@@ -12,3 +12,25 @@
 th {
     font-size: 16px;
 }
+
+/* Tamaño lg */
+@media only screen and (min-width: 992px) {
+    
+}
+
+/* Tamaño md */
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    
+}
+
+/* Tamaño sm */
+@media only screen and (max-width: 576px) {
+    .login{
+        font-size: 10px;
+    }
+
+    input.login {
+        width: 110%;
+        margin-left: -5%;
+    }
+}

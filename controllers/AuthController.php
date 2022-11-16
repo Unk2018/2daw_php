@@ -28,9 +28,9 @@ class AuthController
         */
         if ($user_ok && is_object($user_ok)) {
             $_SESSION['identity'] = $user_ok;
-            header('Location: http://localhost/2daw-clase/?controller=auth&action=home');
+            header('Location:'.url.'controller=auth&action=home');
         } else {
-            header('Location: http://localhost/2daw-clase/index.php');
+            header('Location: '.url.'index.php');
         }
     }
 
@@ -39,7 +39,7 @@ class AuthController
         if (isset($_SESSION['identity'])) {
             echo $GLOBALS['twig']->render('home.twig');
         } else {
-            header('Location: http://localhost/2daw-clase/?controller=auth&action=login');
+            header('Location: '.url.'controller=auth&action=login');
         }
     }
 
@@ -51,6 +51,6 @@ class AuthController
             unset($_SESSION['identity']);
         }
 
-        header('Location: http://localhost/2daw-clase/?controller=auth&action=login');
+        header('Location: '.url.'controller=auth&action=login');
     }
 }

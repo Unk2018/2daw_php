@@ -52,11 +52,11 @@ class Tienda implements Model
     }
 
     // Me devuelve el elemento filtrado por id
-    public function findById($id_tienda)
+    public function findById()
     {
         $db = Database::conectar();
-        $findById = $db->query("SELECT * FROM tienda WHERE id_tienda = " . $this->id_tienda);
-        return $findById;
+        $findById = $db->query("SELECT * FROM tienda WHERE id_tienda = $this->id_tienda");
+        return $findById->fetch_object();
     }
 
     // Insertar en la base de datos
@@ -79,7 +79,7 @@ class Tienda implements Model
     }
 
     // Eliminar en la base de datos filtrando por id
-    public function delete($id_tienda)
+    public function delete()
     {
         $db = Database::conectar();
         $delete = $db->query("DELETE FROM tienda WHERE id_tienda=$this->id_tienda");

@@ -66,10 +66,10 @@ class Producto implements Model
     }
 
     // Me devuelve el elemento filtrado por id
-    public function findById($id_producto)
+    public function findById()
     {
         $db = Database::conectar();
-        $findById = $db->query("SELECT * FROM producto WHERE id_producto = " . $this->id_producto);
+        $findById = $db->query("SELECT * FROM producto WHERE id_producto = $this->id_producto");
         return $findById;
     }
 
@@ -93,7 +93,7 @@ class Producto implements Model
     }
 
     // Eliminar en la base de datos filtrando por id
-    public function delete($id_producto)
+    public function delete()
     {
         $db = Database::conectar();
         $delete = $db->query("DELETE FROM producto WHERE id_producto=$this->id_producto");
