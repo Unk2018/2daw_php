@@ -1,5 +1,5 @@
 <?php
-require_once 'models/User.php';
+require_once 'models/Producto.php';
 // Carga el fichero autoload.php
 require_once 'vendor/autoload.php';
 
@@ -11,10 +11,10 @@ class TiendaController
      */
     public function index()
     {
-        $user = new User();
+        $product = new Producto();
         echo $GLOBALS["twig"]->render(
-            'users/index.twig',
-            ['users' => $user->findAll()]
+            'producto/index.twig',
+            ['products' => $product->findAll()]
         );
     }
 

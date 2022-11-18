@@ -28,9 +28,16 @@ class AuthController
         */
         if ($user_ok && is_object($user_ok)) {
             $_SESSION['identity'] = $user_ok;
-            header('Location:'.url.'controller=auth&action=home');
+
+            // Si el usuario es admin, entonces te lleva a home
+            if (isset($_SESSION['admin'])) {
+                header('Location:' . url . 'controller=auth&action=home');
+                // En caso contario, te lleva al 'home' de los clientes
+            } else {
+                header('Location:' . url . 'controller=auth&action=welcome');
+            }
         } else {
-            header('Location: '.url.'index.php');
+            header('Location: ' . url . 'index.php');
         }
     }
 
@@ -39,7 +46,7 @@ class AuthController
         if (isset($_SESSION['identity'])) {
             echo $GLOBALS['twig']->render('home.twig');
         } else {
-            header('Location: '.url.'controller=auth&action=login');
+            header('Location: ' . url . 'controller=auth&action=login');
         }
     }
 
@@ -51,6 +58,26 @@ class AuthController
             unset($_SESSION['identity']);
         }
 
-        header('Location: '.url.'controller=auth&action=login');
+        if (isset($_SESSION['admin'])) {
+            unset($_SESSION['admin']);
+        }
+
+        header('Location: ' . url . 'controller=auth&action=login');
+    }
+
+    public static function welcome()
+    {
+        // Si hay una sesión iniciada, entonces quita 'identity'
+        if (isset($_SESSION['identity'])) {
+            echo $GLOBALS['twig']->render(
+                'welcome.twig',
+                [
+                    'identity'=>$_SESSION['identity'],
+                    'url'=>url
+                ]
+            );
+        } else {
+            header('Location: ' . url . 'controller=auth&action=index');
+        }
     }
 }

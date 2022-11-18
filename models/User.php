@@ -138,8 +138,22 @@ class User implements Model
         }
         
         if ($verify) {
+            if($this->isAdmin($user->id_usuario)){
+                $_SESSION['admin'] = true;
+            }
             // Password coincide y debe hacer login
             return $user;
+        } else {
+            return false;
+        }
+    }
+
+    public static function isAdmin($id_usuario){
+        $db = Database::conectar();
+        $tipo = $db->query("SELECT id_rol FROM usuario WHERE id_usuario = $id_usuario") ->fetch_object();
+        
+        if($tipo->id_rol == 1){
+            return true;
         } else {
             return false;
         }

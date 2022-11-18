@@ -26,7 +26,8 @@ class UsersController
      */
     public function create()
     {
-        // if (isset($_SESSION['identity'])) {
+        // Mira si es admin para poder ir a crear y demás
+        // if (isset($_SESSION['identity']) && isset($_SESSION['admin])) {
             $user = new User();
             echo $GLOBALS["twig"]->render(
                 'users/create.twig'
