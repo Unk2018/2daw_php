@@ -9,49 +9,44 @@
   <a class="btn btn-primary" href="http://localhost/2daw-clase/?controller=users&action=create">Agregar usuario</a>
   <a href="http://localhost/2daw-clase/?controller=auth&action=login" class="btn btn-primary">Login</a>
   <a href="#" class="btn btn-primary">Register</a>
-  {# Condicionales #}
-  {#
-  {% if mensaje %}
-    <p>{{ mensaje }}</p>
-  {% else %}
-    <p>No existe mensaje</p>
-  {% endif %}
 
-  <p>{{ alumno }}</p>
-  <p>{{ numero }}</p>
-#}
-
-  <table class="table table-striped text-center mt-4 contenedorCentro">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Email</th>
-        <th scope="col">Id_rol</th>
-        <th scope="col">Password</th>
-        <th scope="col">Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      {# Bucle en Twig #}
-      {% for u in users %}
+  <!-- Tabla responsive. Hace que puedas hacer scroll horizontal (dependiendo del table-responsive 
+  introducido, te permitirá hacer scroll dependiendo del tamaño y cuando se pueda, es decir, cuando empieza
+  a comerse contenido a partir de cierto tamaño) -->
+  <div class="table-responsive">
+    <table class="table table-striped table-responsive-md table-responsive-sm text-center mt-4 contenedorCentro">
+      <thead>
         <tr>
-          <td>{{ u.id_usuario }}</td>
-          <td>{{ u.nombre }}</td>
-          <td>{{ u.email }}</td>
-          <td>{{ u.id_rol }}</td>
-          <td>{{ u.password }}</td>
-          <td>
-            <a class="btn btn-success" href="http://localhost/2daw-clase/?controller=users&action=show&id={{ u.id_usuario }}">Ver</a>
-            <a class="btn btn-secondary" href="http://localhost/2daw-clase/?controller=users&action=edit&id={{ u.id_usuario }}">Editar</a>
-            <a class="btn btn-danger" href="http://localhost/2daw-clase/?controller=users&action=delete&id={{ u.id_usuario }}">Eliminar</a>
-          </td>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Email</th>
+          <th scope="col">Id_rol</th>
+          <th scope="col">Password</th>
+          <th scope="col">Acciones</th>
         </tr>
-      {% else %}
-        <li>
-          <em>No se encuentran usuarios</em>
-        </li>
-      {% endfor %}
-    </tbody>
-  </table>
+      </thead>
+
+      <tbody>
+        {# Bucle en Twig #}
+        {% for u in users %}
+          <tr>
+            <td>{{ u.id_usuario }}</td>
+            <td>{{ u.nombre }}</td>
+            <td>{{ u.email }}</td>
+            <td>{{ u.id_rol }}</td>
+            <td>{{ u.password }}</td>
+            <td>
+              <a class="btn btn-success" href="http://localhost/2daw-clase/?controller=users&action=show&id={{ u.id_usuario }}">Ver</a>
+              <a class="btn btn-secondary" href="http://localhost/2daw-clase/?controller=users&action=edit&id={{ u.id_usuario }}">Editar</a>
+              <a class="btn btn-danger" href="http://localhost/2daw-clase/?controller=users&action=delete&id={{ u.id_usuario }}">Eliminar</a>
+            </td>
+          </tr>
+        {% else %}
+          <li>
+            <em>No se encuentran usuarios</em>
+          </li>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 {% endblock %}

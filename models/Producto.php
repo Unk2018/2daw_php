@@ -1,7 +1,4 @@
 <?php
-require 'config/Database.php';
-require 'models/Model.php';
-
 class Producto implements Model
 {
     private $id_producto;
@@ -97,7 +94,7 @@ class Producto implements Model
     }
 
     // Actualizar en la base de datos filtrando por id_producto
-    public function updateByCantid_productoad()
+    public function updateByCantidad()
     {
         $db = Database::conectar();
         $update = $db->query("UPDATE producto SET cantidad=cantidad-'$this->cantidad' WHERE id_producto=$this->id_producto");

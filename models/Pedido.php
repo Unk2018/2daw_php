@@ -1,5 +1,4 @@
 <?php
-
 class Pedido implements Model
 {
 

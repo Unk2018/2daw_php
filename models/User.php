@@ -1,6 +1,6 @@
 <?php
-require 'config/Database.php';
 require 'models/Model.php';
+require 'config/Database.php';
 
 class User implements Model
 {
@@ -159,3 +159,5 @@ class User implements Model
         }
     }
 }
+
+?>

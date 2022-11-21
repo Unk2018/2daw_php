@@ -10,14 +10,15 @@
 // Carga el fichero autoload.php y demás ficheros
 require_once 'config/Parameters.php';
 require_once 'vendor/autoload.php';
+include 'controllers/Controller.php';
 include 'controllers/UsersController.php';
 include 'controllers/AuthController.php';
 include 'controllers/IndexController.php';
 include 'controllers/ErrorController.php';
-include 'controllers/ProductosController.php';
-include 'controllers/CategoriasController.php';
+include 'controllers/ProductoController.php';
+include 'controllers/GenreController.php';
 include 'controllers/CarritoController.php';
-include 'controllers/PedidosController.php';
+include 'controllers/PedidoController.php';
 
 // // Ubicación de mis plantillas de Twig
 $loader = new \Twig\Loader\FilesystemLoader('templates');
