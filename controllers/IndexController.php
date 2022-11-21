@@ -1,10 +1,9 @@
 <?php
-    class IndexController{
-        public function index(){
-            echo $GLOBALS['twig']->render(
-                'index.twig', 
-                ['name' => 'EJEMPLO']
-            );
-        }
+class IndexController 
+{
+    public static function index()
+    {
+        echo $GLOBALS['twig']->render('index.twig');
     }
+}
 ?>

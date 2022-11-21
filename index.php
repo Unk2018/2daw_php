@@ -7,8 +7,17 @@
  * Esto instala la versión más actual de twig.
  */
 
-// Carga el fichero autoload.php
+// Carga el fichero autoload.php y demás ficheros
+require_once 'config/Parameters.php';
 require_once 'vendor/autoload.php';
+include 'controllers/UsersController.php';
+include 'controllers/AuthController.php';
+include 'controllers/IndexController.php';
+include 'controllers/ErrorController.php';
+include 'controllers/ProductosController.php';
+include 'controllers/CategoriasController.php';
+include 'controllers/CarritoController.php';
+include 'controllers/PedidosController.php';
 
 // // Ubicación de mis plantillas de Twig
 $loader = new \Twig\Loader\FilesystemLoader('templates');
@@ -16,11 +25,6 @@ $twig = new \Twig\Environment($loader);
 
 $GLOBALS["twig"];
 
-include 'controllers/IndexController.php';
-include 'controllers/UsersController.php';
-include 'controllers/AuthController.php';
-include 'controllers/ErrorController.php';
-include 'config/Parameters.php';
 session_start();
 
 /* Primero comprueba que controlador voy a cargar por URL */
@@ -49,7 +53,6 @@ if (isset($_GET['controller'])) {
         CAMBIAR CABECERA
         */
         ErrorController::_404();
-
     }
 } else {
     // Si no existe un controller en mi url, recojo un controlador por defecto
@@ -57,7 +60,7 @@ if (isset($_GET['controller'])) {
     $controller_default = controller_default;    
     $action_default = action_default;
     $controller = new $controller_default();
-    $controller->$action_default();
+    $controller::$action_default();
 
     // Mi acción por defecto es lanzar mi index.twig como página de caída
     //echo $twig->render('index.twig');

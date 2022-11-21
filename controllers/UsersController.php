@@ -1,102 +1,115 @@
 <?php
 require_once 'models/User.php';
-// Carga el fichero autoload.php
-require_once 'vendor/autoload.php';
 
-class UsersController
+class UsersController implements Controller
 {
     /**
      * 
      */
     public static function index()
     {
-        // if (isset($_SESSION['identity'])) {
+        // if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
         $user = new User();
         echo $GLOBALS["twig"]->render(
             'users/index.twig',
-            ['users' => $user->findAll()]
+            [
+                'users' => $user->findAll(),
+                'identity' => $_SESSION['identity'],
+                'url' => url
+            ]
         );
         // } else {
-        // header('Location: http://localhost/2daw-clase/?controller=auth&action=login');
+        // header('Location: '.url.'controller=auth&action=login');
         // }
     }
 
     /**
      * Crear usuarios
      */
-    public function create()
+    public static function create()
     {
         // Mira si es admin para poder ir a crear y demás
-        // if (isset($_SESSION['identity']) && isset($_SESSION['admin])) {
-            $user = new User();
-            echo $GLOBALS["twig"]->render(
-                'users/create.twig'
-            );
+        // if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
+        echo $GLOBALS["twig"]->render(
+            'users/create.twig',
+            [
+                'identity' => $_SESSION['identity'],
+                'url' => url
+            ]
+        );
         // } else {
-            // header('Location: http://localhost/2daw-clase/?controller=auth&action=login');
+        // header('Location: '.url.'controller=auth&action=login');
         // }
     }
 
     /**
      * 
      */
-    public function show()
+    public static function show()
     {
-        if (isset($_SESSION['identity'])) {
+        if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
             $user = new User();
             $user->setId_usuario($_GET['id']);
             echo $GLOBALS["twig"]->render(
                 'users/show.twig',
-                ['user' => $user->findById($_GET['id'])]
+                [
+                    'user' => $user->findById(),
+                    'identity' => $_SESSION['identity'],
+                    'url' => url
+                ]
             );
         } else {
-            header('Location: http://localhost/2daw-clase/?controller=auth&action=login');
+            header('Location: ' . url . 'controller=auth&action=login');
         }
     }
 
     /**
      * 
      */
-    public function edit()
+    public static function edit()
     {
-        if (isset($_SESSION['identity'])) {
+        if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
             $user = new User();
             $user->setId_usuario($_GET['id']);
             echo $GLOBALS["twig"]->render(
                 'users/edit.twig',
-                ['user' => $user->findById($_GET['id'])]
+                [
+                    'user' => $user->findById(),
+                    'identity' => $_SESSION['identity'],
+                    'url' => url
+                ]
             );
         } else {
-            header('Location: http://localhost/2daw-clase/?controller=auth&action=login');
+            header('Location: ' . url . 'controller=auth&action=login');
         }
     }
 
     /**
      * Guardar usuarios creados
      */
-    public function save()
+    public static function save()
     {
-        // if (isset($_SESSION['identity'])) {
-            $user = new User();
-            $user->setNombre($_POST['nombre']);
-            $user->setEmail($_POST['email']);
-            $user->setId_rol($_POST['id_rol']);
-            if (isset($_POST['password'])) {
-                $user->setPassword(password_hash($_POST['password'], PASSWORD_BCRYPT, ['cont' => 4]));
-            }
-            $user->save($user);
-            header("Location: http://localhost/2daw-clase/?controller=users&action=index");
+        // if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
+        $user = new User();
+        $user->setNombre($_POST['nombre']);
+        $user->setEmail($_POST['email']);
+        $user->setId_rol($_POST['id_rol']);
+        if (isset($_POST['password'])) {
+            $user->setPassword(password_hash($_POST['password'], PASSWORD_BCRYPT, ['cont' => 4]));
+        }
+        $user->save($user);
+        header("Location: '.url.'controller=users&action=index");
         // } else {
-            // header('Location: http://localhost/2daw-clase/?controller=auth&action=login');
+        // header('Location: '.url.'controller=auth&action=login');
         // }
     }
 
     /**
      * 
      */
-    public function update()
+    public static function update()
     {
-        if (isset($_SESSION['identity'])) {
+        if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
             $user = new User();
             $user->setId_usuario($_POST['id']);
             $user->setNombre($_POST['nombre']);
@@ -106,19 +119,25 @@ class UsersController
                 $user->setPassword(password_hash($_POST['password'], PASSWORD_BCRYPT, ['cont' => 4]));
             }
             $user->update();
-            header("Location: http://localhost/2daw-clase/?controller=users&action=index");
+            header("Location: '.url.'controller=users&action=index");
         } else {
-            header('Location: http://localhost/2daw-clase/?controller=auth&action=login');
+            header('Location: ' . url . 'controller=auth&action=login');
         }
     }
     /**
      * 
      */
-    public function delete()
+    public static function delete()
     {
-        $user = new User();
-        $user->setId_usuario($_GET['id']);
-        $user->delete();
-        header("Location: http://localhost/2daw-clase/?controller=users&action=index");
+        if (isset($_SESSION['identity'])) {
+            $user = new User();
+            $user->setId_usuario($_GET['id']);
+            $user->delete();
+            header("Location: '.url.'controller=users&action=index");
+        } else {
+            header('Location: ' . url . 'controller=auth&action=login');
+        }
     }
 }
+
+?>

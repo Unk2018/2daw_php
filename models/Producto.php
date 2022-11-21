@@ -5,11 +5,14 @@ require 'models/Model.php';
 class Producto implements Model
 {
     private $id_producto;
-    private $nombre;
-    private $f_creado;
     private $id_genre;
+    private $nombre;
+    private $cantidad;
+    private $precio;
 
-    // Class constructor
+    /**
+     * Class constructor.
+     */
     public function __construct()
     {
     }
@@ -19,19 +22,24 @@ class Producto implements Model
         return $this->id_producto;
     }
 
+    function getId_genre()
+    {
+        return $this->id_genre;
+    }
+
     function getNombre()
     {
         return $this->nombre;
     }
 
-    function getf_creado()
+    function getCantidad()
     {
-        return $this->f_creado;
+        return $this->cantidad;
     }
 
-    function getId_genre()
+    function getPrecio()
     {
-        return $this->id_genre;
+        return $this->precio;
     }
 
     function setId_producto($id_producto)
@@ -39,61 +47,68 @@ class Producto implements Model
         $this->id_producto = $id_producto;
     }
 
+    function setId_genre($id_genre)
+    {
+        $this->id_genre = $id_genre;
+    }
+
     function setNombre($nombre)
     {
         $this->nombre = $nombre;
     }
 
-    function setf_creado($f_creado)
+    function setCantidad($cantidad)
     {
-        $this->f_creado = $f_creado;
+        $this->cantidad = $cantidad;
     }
 
-    function setId_genre($id_genre)
+    function setPrecio($precio)
     {
-        $this->id_genre = $id_genre;
+        $this->precio = $precio;
     }
 
     // Me va a devolver todos los elementos
     public function findAll()
     {
         $db = Database::conectar();
-        $findAll = $db->query("SELECT * FROM producto");
+        $findAll = $db->query("SELECT * FROM producto;");
         return $findAll;
     }
 
-    // Me devuelve el elemento filtrado por id
+    // Me devuelve el elemento filtrado por id_producto
     public function findById()
     {
         $db = Database::conectar();
-        $findById = $db->query("SELECT * FROM producto WHERE id_producto = $this->id_producto");
-        return $findById;
+        return $db->query("SELECT * FROM producto WHERE id_producto=$this->id_producto")->fetch_object();
     }
 
     // Insertar en la base de datos
     public function save()
     {
         $db = Database::conectar();
-        // En las dobles comillas, se puede poner lo del $this sin los  ' . ' ya que te lo cogen
-        // En las comillas simples no te lo coge
-        $save = $db->query("INSERT INTO producto (nombre, f_creado, id_genre, password) 
-        VALUES ('$this->nombre', '$this->f_creado', '$this->id_genre', '$this->password')");
-        return $save;
+        $save = $db->query("INSERT INTO producto (id_genre, nombre, cantidad, precio) VALUES ('$this->id_genre','$this->nombre', '$this->cantidad', '$this->precio')");
     }
 
-    // Actualizar en la base de datos filtrando por id
+    // Actualizar en la base de datos filtrando por id_producto
     public function update()
     {
         $db = Database::conectar();
-        $update = $db->query("UPDATE producto SET nombre='$this->nombre', f_creado='$this->f_creado', id_genre='$this->id_genre', password='$this->password'");
-        return $update;
+        $update = $db->query("UPDATE producto SET id_genre='$this->id_genre', nombre='$this->nombre', cantidad='$this->cantidad', precio='$this->precio' WHERE id_producto=$this->id_producto");
     }
 
-    // Eliminar en la base de datos filtrando por id
+    // Actualizar en la base de datos filtrando por id_producto
+    public function updateByCantid_productoad()
+    {
+        $db = Database::conectar();
+        $update = $db->query("UPDATE producto SET cantidad=cantidad-'$this->cantidad' WHERE id_producto=$this->id_producto");
+    }
+
+    // Eliminar en la base de datos filtrando por id_producto
     public function delete()
     {
         $db = Database::conectar();
         $delete = $db->query("DELETE FROM producto WHERE id_producto=$this->id_producto");
-        return $delete;
     }
 }
+
+?>
