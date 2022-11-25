@@ -6,7 +6,7 @@ class ErrorController
     public static function _404()
     {
         echo $GLOBALS['twig']->render(
-            'error/404.twig',
+            'errors/404.twig',
             [
                 'url' => url
             ]
@@ -17,7 +17,7 @@ class ErrorController
     public static function _403()
     {
         echo $GLOBALS['twig']->render(
-            'error/403.twig',
+            'errors/403.twig',
             [
                 'url' => url
             ]
@@ -28,7 +28,7 @@ class ErrorController
     public static function _500()
     {
         echo $GLOBALS['twig']->render(
-            'error/500.twig',
+            'errors/500.twig',
             [
                 'url' => url
             ]

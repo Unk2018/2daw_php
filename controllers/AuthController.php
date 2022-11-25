@@ -5,7 +5,7 @@ class AuthController
     /* Función para redirigir al login */
     public function login()
     {
-        echo $GLOBALS['twig']->render('auth/login.twig');
+        echo $GLOBALS['twig']->render('auth/login_register.twig',);
     }
 
     public function doLogin()
@@ -31,22 +31,27 @@ class AuthController
 
             // Si el usuario es admin, entonces te lleva a home
             if (isset($_SESSION['admin'])) {
-                header('Location:' . url . 'controller=auth&action=home');
+                header('Location:' . url . 'auth/home');
                 // En caso contario, te lleva al 'home' de los clientes
             } else {
-                header('Location:' . url . 'controller=auth&action=welcome');
+                header('Location:' . url . 'auth/welcome');
             }
         } else {
-            header('Location: ' . url . 'index.php');
+            header('Location: ' . url . 'index');
         }
     }
 
     public function home()
     {
         if (isset($_SESSION['identity'])) {
-            echo $GLOBALS['twig']->render('home.twig');
+            echo $GLOBALS['twig']->render('home.twig',
+            [
+                'identity'=>$_SESSION['identity'],
+                'url'=>url
+            ]
+        );
         } else {
-            header('Location: ' . url . 'controller=auth&action=login');
+            header('Location: ' . url . 'auth/login');
         }
     }
 
@@ -62,7 +67,7 @@ class AuthController
             unset($_SESSION['admin']);
         }
 
-        header('Location: ' . url . 'controller=auth&action=login');
+        header('Location: ' . url . 'auth/login');
     }
 
     public static function welcome()
@@ -77,7 +82,7 @@ class AuthController
                 ]
             );
         } else {
-            header('Location: ' . url . 'controller=auth&action=index');
+            header('Location: ' . url . 'auth/index');
         }
     }
 }

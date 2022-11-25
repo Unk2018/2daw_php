@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" class="vh-100">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/2daw-clase/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+    <link href="/2daw-clase/node_modules/bootstrap/dist/js/bootstrap.js" rel="stylesheet" />
+    <script src="/2daw-clase/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link href="/2daw-clase/assets/css/login.css" rel="stylesheet" />
+    <title>Login</title>
+  </head>
+
+  <body>
+    <div class="container mt-5">
+      <!-- Grid que divide en 3 columnas el Login -->
+      <div class="row justify-content-center row-cols-3">
+        <div class="mt-5 col-lg-3 col-md-4 col-sm-5 col-6">
+          <h1 class="text-center mt-5 text-white">Login</h1>
+
+          <form action="http://localhost/2daw-clase/auth/doLogin" method="POST">
+            <div class="m-0 p-0 mt-5 mb-4">
+              <div class="mb-4 col-12">
+                <input type="email" class="form-control logRegister" id="email" name="email" placeholder="Escribe email" aria-describedby="email" />
+              </div>
+              <div class="mb-5 col-12">
+                <input type="password" class="form-control logRegister" id="password" name="password" placeholder="Escribe password" aria-describedby="password" />
+              </div>
+
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary col-sm-10 col-md-4 col-lg-2">Login</button>
+              </div>
+            </div>
+          </form>
+
+          <div class="container-fluid text-center mt-2">
+            <span data-bs-toggle="modal" data-bs-target="#modalRegistro">
+              <span class="text-info">¿No tienes cuenta?</span>
+              <span class="text-white">¡Registrate!</span>
+            </span>
+
+            <div class="modal fade" id="modalRegistro">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <h2 class="modal-title mt-5 mb-5">Registrar una cuenta nueva</h2>
+
+                  <div class="container">
+                    <div class="row justify-content-center row-cols-3">
+                      <div class="col-8">
+                        <form action="http://localhost/2daw-clase/?controller=auth&action=doLogin" method="post">
+                          <div class="m-0 p-0 mb-4">
+                            <div class="mb-4 col-12">
+                              <input type="text" class="form-control logRegister" id="nombre" name="nombre" placeholder="Escribe tu nombre" aria-describedby="email" required />
+                            </div>
+                            <div class="mb-4 col-12">
+                              <input type="text" class="form-control logRegister" id="email" name="email" placeholder="Escribe tu email" aria-describedby="email" required />
+                            </div>
+                            <div class="mb-4 col-12">
+                              <!-- visually-hidden oculta el input -->
+                              <input type="number" class="form-control visually-hidden logRegister" id="id_rol" name="id_rol" value="2" disabled />
+                            </div>
+                            <div class="mb-5 col-12">
+                              <input type="password" class="form-control logRegister" id="password" name="password" placeholder="Escribe tu password" aria-describedby="password" required />
+                            </div>
+
+                            <button type="submit" class="btn btn-primary col-sm-10 col-md-4 col-lg-2">Login</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,6 +1,6 @@
 # Utilizamos el modulo rewrite
 # Si existe el modulo rewrite se ejecutará internamente
-<IfModule mod_write.c>
+<IfModule mod_rewrite.c>
     # Activamos el modulo rewrite
     RewriteEngine on
 

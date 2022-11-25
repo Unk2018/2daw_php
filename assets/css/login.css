@@ -3,13 +3,17 @@
 }
 
 body {
-  background: linear-gradient(152deg, #380036 5%, #0cbabaf9 95%);
+  background: linear-gradient(152deg, #380036 5%, #0cbabaf9 100%);
   background-size: cover;
   background-repeat: no-repeat;
 }
 
 .btn {
   width: 5rem;
+}
+
+.modal-content {
+  background: linear-gradient(152deg, #267aa5 0%, #0cbabaf9 100%);
 }
 
 /* Tamaño lg */
@@ -20,14 +24,18 @@ body {
 @media only screen and (min-width: 768px) and (max-width: 992px) {
 }
 
+/* Tamaño tablets más pequeñas */
+@media only screen and (min-width: 576px) and (max-width: 768px) {
+}
+
 /* Tamaño sm */
 @media only screen and (max-width: 576px) {
-  .login {
-    font-size: 10px;
+  .logRegister {
+    font-size: 12px;
   }
 
-  input.login {
-    width: 110%;
-    margin-left: -5%;
+  .btn {
+    width: 4rem;
+    font-size: 12px;
   }
 }
