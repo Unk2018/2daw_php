@@ -20,7 +20,7 @@
         <div class="mt-5 col-lg-3 col-md-4 col-sm-5 col-6">
           <h1 class="text-center mt-5 text-white">Login</h1>
 
-          <form action="http://localhost/2daw-clase/auth/doLogin" method="POST">
+          <form action="{{url}}auth/doLogin" method="POST">
             <div class="m-0 p-0 mt-5 mb-4">
               <div class="mb-4 col-12">
                 <input type="email" class="form-control logRegister" id="email" name="email" placeholder="Escribe email" aria-describedby="email" />
@@ -49,20 +49,20 @@
                   <div class="container">
                     <div class="row justify-content-center row-cols-3">
                       <div class="col-8">
-                        <form action="http://localhost/2daw-clase/?controller=auth&action=doLogin" method="post">
+                        <form action="{{url}}auth/register" method="post">
                           <div class="m-0 p-0 mb-4">
                             <div class="mb-4 col-12">
-                              <input type="text" class="form-control logRegister" id="nombre" name="nombre" placeholder="Escribe tu nombre" aria-describedby="email" required />
+                              <input type="text" class="form-control logRegister" id="nombreReg" name="nombreReg" placeholder="Escribe tu nombre" aria-describedby="email" required />
                             </div>
                             <div class="mb-4 col-12">
-                              <input type="text" class="form-control logRegister" id="email" name="email" placeholder="Escribe tu email" aria-describedby="email" required />
+                              <input type="text" class="form-control logRegister" id="emailReg" name="emailReg" placeholder="Escribe tu email" aria-describedby="email" required />
                             </div>
                             <div class="mb-4 col-12">
                               <!-- visually-hidden oculta el input -->
                               <input type="number" class="form-control visually-hidden logRegister" id="id_rol" name="id_rol" value="2" disabled />
                             </div>
                             <div class="mb-5 col-12">
-                              <input type="password" class="form-control logRegister" id="password" name="password" placeholder="Escribe tu password" aria-describedby="password" required />
+                              <input type="password" class="form-control logRegister" id="passwordReg" name="passwordReg" placeholder="Escribe tu password" aria-describedby="password" required />
                             </div>
 
                             <button type="submit" class="btn btn-primary col-sm-10 col-md-4 col-lg-2">Login</button>

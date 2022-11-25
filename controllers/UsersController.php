@@ -19,7 +19,7 @@ class UsersController implements Controller
             ]
         );
         // } else {
-        // header('Location: '.url.'controller=auth&action=login');
+        // header('Location: '.url.'auth/login');
         // }
     }
 
@@ -38,7 +38,7 @@ class UsersController implements Controller
             ]
         );
         // } else {
-        // header('Location: '.url.'controller=auth&action=login');
+        // header('Location: '.url.'auth/login');
         // }
     }
 
@@ -59,7 +59,7 @@ class UsersController implements Controller
                 ]
             );
         } else {
-            header('Location: ' . url . 'controller=auth&action=login');
+            header('Location: ' . url . 'auth/login');
         }
     }
 
@@ -80,7 +80,7 @@ class UsersController implements Controller
                 ]
             );
         } else {
-            header('Location: ' . url . 'controller=auth&action=login');
+            header('Location: ' . url . 'auth/login');
         }
     }
 
@@ -98,9 +98,9 @@ class UsersController implements Controller
             $user->setPassword(password_hash($_POST['password'], PASSWORD_BCRYPT, ['cont' => 4]));
         }
         $user->save($user);
-        header("Location: '.url.'controller=users&action=index");
+        header('Location: '.url.'users/index');
         // } else {
-        // header('Location: '.url.'controller=auth&action=login');
+        // header('Location: '.url.'auth/login');
         // }
     }
 
@@ -119,9 +119,9 @@ class UsersController implements Controller
                 $user->setPassword(password_hash($_POST['password'], PASSWORD_BCRYPT, ['cont' => 4]));
             }
             $user->update();
-            header("Location: '.url.'controller=users&action=index");
+            header('Location: '.url.'users/index');
         } else {
-            header('Location: ' . url . 'controller=auth&action=login');
+            header('Location: ' . url . 'auth/login');
         }
     }
     /**
@@ -133,11 +133,9 @@ class UsersController implements Controller
             $user = new User();
             $user->setId_usuario($_GET['id']);
             $user->delete();
-            header("Location: '.url.'controller=users&action=index");
+            header('Location: '.url.'users/index');
         } else {
-            header('Location: ' . url . 'controller=auth&action=login');
+            header('Location: ' . url . 'auth/login');
         }
     }
 }
-
-?>

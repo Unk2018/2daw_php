@@ -5,7 +5,12 @@ class AuthController
     /* Función para redirigir al login */
     public function login()
     {
-        echo $GLOBALS['twig']->render('auth/login_register.twig',);
+        echo $GLOBALS['twig']->render(
+            'auth/login_register.twig',
+            [
+                'url' => url
+            ]
+        );
     }
 
     public function doLogin()
@@ -44,12 +49,13 @@ class AuthController
     public function home()
     {
         if (isset($_SESSION['identity'])) {
-            echo $GLOBALS['twig']->render('home.twig',
-            [
-                'identity'=>$_SESSION['identity'],
-                'url'=>url
-            ]
-        );
+            echo $GLOBALS['twig']->render(
+                'home.twig',
+                [
+                    'identity' => $_SESSION['identity'],
+                    'url' => url
+                ]
+            );
         } else {
             header('Location: ' . url . 'auth/login');
         }
@@ -77,14 +83,23 @@ class AuthController
             echo $GLOBALS['twig']->render(
                 'welcome.twig',
                 [
-                    'identity'=>$_SESSION['identity'],
-                    'url'=>url
+                    'identity' => $_SESSION['identity'],
+                    'url' => url
                 ]
             );
         } else {
-            header('Location: ' . url . 'auth/index');
+            header('Location: ' . url . 'auth/login');
         }
     }
-}
 
-?>
+    public static function register()
+    {
+        // Registra los datos después y te manda/recarga página después de pasar los datos
+        echo $GLOBALS['twig']->render(
+            'auth/login_register.twig',
+            [
+                'url' => url
+            ]
+        );
+    }
+}
