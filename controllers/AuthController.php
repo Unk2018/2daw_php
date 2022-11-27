@@ -94,6 +94,21 @@ class AuthController
 
     public static function register()
     {
+        /* Recoger nombre, email y password del register 
+        - Password tiene que estar encriptado
+        - Meter el id_rol de la cuenta (no puede ser 1)
+        - Utilizo el modelo de usuario para lanzar el método que comprueba si he introducido los datos
+        correctamente
+        */
+        $user = new User();
+        $user->setNombre($_POST['nombreReg']);
+        $user->setEmail($_POST['emailReg']);
+        $user->setId_rol(2);
+        if (isset($_POST['passwordReg'])) {
+            $user->setPassword(password_hash($_POST['passwordReg'], PASSWORD_BCRYPT, ['cont' => 4]));
+        }
+        $user->register(); // Objeto usuario si correcto o false si no lo es
+
         // Registra los datos después y te manda/recarga página después de pasar los datos
         echo $GLOBALS['twig']->render(
             'auth/login_register.twig',

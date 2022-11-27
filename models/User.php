@@ -131,14 +131,14 @@ class User implements Model
             /* Método fetch_object() me devuelve los valores recogidos de mi base de datos en un 
             formato objeto */
             $user = $user->fetch_object();
-            
+
             /* Verifica un string con otro encriptado. En este caso se comprueba la password
             introducida con la de la base de datos. Devuelve un booleano */
             $verify = password_verify($this->password, $user->password);
         }
-        
+
         if ($verify) {
-            if($this->isAdmin($user->id_usuario)){
+            if ($this->isAdmin($user->id_usuario)) {
                 $_SESSION['admin'] = true;
             }
             // Password coincide y debe hacer login
@@ -148,16 +148,28 @@ class User implements Model
         }
     }
 
-    public static function isAdmin($id_usuario){
+    public static function isAdmin($id_usuario)
+    {
         $db = Database::conectar();
-        $tipo = $db->query("SELECT id_rol FROM usuario WHERE id_usuario = $id_usuario") ->fetch_object();
-        
-        if($tipo->id_rol == 1){
+        $tipo = $db->query("SELECT id_rol FROM usuario WHERE id_usuario = $id_usuario")->fetch_object();
+
+        if ($tipo->id_rol == 1) {
             return true;
         } else {
             return false;
         }
     }
-}
 
-?>
+    /* Comprueba los datos introducido. En caso correcto, devuelve usuario. Si no, devuelve false */
+    public function register()
+    {
+        $db = Database::conectar();
+
+        // Mete a una variable usuario el resultado de la query
+        if ($this->password != null && $this->email != null && $this->nombre != null) {
+            $register = $db->query("INSERT INTO usuario (nombre, email, id_rol, password) 
+        VALUES ('$this->nombre', '$this->email', $this->id_rol, '$this->password')");
+        }
+        return $register;
+    }
+}
