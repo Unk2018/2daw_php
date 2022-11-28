@@ -1,15 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome</title>
-  </head>
+{# Enlazar este fichero con la plantilla correspondiente #}
+{% extends 'layouts/users.twig' %}
 
-  <body>
-    <h1>Welcome</h1>
-    <a class="btn btn-primary" href="{{url}}users/index">Usuarios</a>
-    <a class="btn btn-danger" href="{{url}}auth/logout">Logout</a>
-  </body>
-</html>
+{% block title %}
+  Welcome
+{% endblock %}
+
+{# Donde están los clientes #}
+{% block content %}
+  <!-- Carousel 5.2 (modificado del carousel 5.0) -->
+  <!-- No es necesario que data-bs-ride sea especificamente carousel, darle un nombre cualquiera -->
+  <!-- Si se pone true, entonces funciona el slide al momento de arrancar la página correspondiente -->
+  <div class="carousel" data-bs-ride="carousel" id="car">
+    <div class="carousel-indicators">
+      <!-- Añadir class="active" para que funcione (indica cuál es el que está activado) -->
+      <button data-bs-slide-to="0" class="active" data-bs-target="#car"></button>
+      <button data-bs-slide-to="1" data-bs-target="#car"></button>
+      <button data-bs-slide-to="2" data-bs-target="#car"></button>
+    </div>
+
+    <!-- Añadir contenido -->
+    <div class="carousel-inner">
+      <!-- Indicar el carousel activo -->
+      <div class="carousel-item active">
+        <!-- Display block: d-block -->
+        <img class="w-100 d-block imgCarousel" src="/2daw-clase/assets/img/juegos.jpg" />
+      </div>
+
+      <div class="carousel-item">
+        <img class="w-100 d-block imgCarousel" src="/2daw-clase/assets/img/company.jpg" />
+      </div>
+
+      <div class="carousel-item">
+        <img class="w-100 d-block imgCarousel" src="/2daw-clase/assets/img/escaparate.jpg" />
+      </div>
+    </div>
+
+    <!-- Botones para anterior y siguiente -->
+    <button class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#car"><span class="carousel-control-prev-icon"></span></button>
+    <button class="carousel-control-next" data-bs-slide="next" data-bs-target="#car"><span class="carousel-control-next-icon"></span></button>
+  </div>
+
+  <div class="container mt-5">
+    <div class="row row-cols-lg-2 row-cols-md-2 row-cols-sm-2">
+      <div class="text-center">
+        <img src="/2daw-clase/assets/img/tiendaLogo.jpg" class="w-50" />
+        <h5 class="mt-1 text-primary">¡Mira un gran catálogo de productos!</h5>
+      </div>
+      <div class="align-self-center mt-3">¡Nuestra página aloja una enorme cantidad de productos de nuestros numerosos proveedores repartidos a largo del mundo! Poseemos una sede en 30 sedes alrededor del globo, apuntando cada vez a más. Los productos serán enviados desde la sede más cercana a tu localización.</div>
+    </div>
+
+    <div class="row row-cols-lg-2 row-cols-md-2 row-cols-sm-2 mt-5">
+      <div class="text-center">
+        <h5 class="mb-3 text-primary">¡Donde tú quieras, a donde quieras!</h5>
+        <img src="/2daw-clase/assets/img/imgJuego.jpg" class="w-50" />
+      </div>
+      <div class="align-self-center mt-3">
+        <p>Con la ayuda de nuestros numerosos departamentos te hacemos llegar el producto deseado lo más rápido posible desde la sede más cercana a tu zona. Los productos que tenemos son los más populares del mercado y no se hay escasez gracias a nuestros proveedores.</p>
+      </div>
+    </div>
+  </div>
+{% endblock %}

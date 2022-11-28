@@ -42,7 +42,7 @@ class AuthController
                 header('Location:' . url . 'auth/welcome');
             }
         } else {
-            header('Location: ' . url . 'index');
+            header('Location: ' . url . 'auth/login');
         }
     }
 
@@ -88,7 +88,12 @@ class AuthController
                 ]
             );
         } else {
-            header('Location: ' . url . 'auth/login');
+            echo $GLOBALS['twig']->render(
+                'index.twig',
+                [
+                    'url' => url
+                ]
+            );
         }
     }
 
@@ -107,7 +112,7 @@ class AuthController
         if (isset($_POST['passwordReg'])) {
             $user->setPassword(password_hash($_POST['passwordReg'], PASSWORD_BCRYPT, ['cont' => 4]));
         }
-        $user->register(); // Objeto usuario si correcto o false si no lo es
+        $user->register(); // Método register del model User
 
         // Registra los datos después y te manda/recarga página después de pasar los datos
         echo $GLOBALS['twig']->render(

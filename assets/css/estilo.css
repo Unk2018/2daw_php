@@ -2,10 +2,12 @@
   margin: 0;
 }
 
+/* Modifica el tamaño de los botones (sobre todo los de edit, eliminar y show) */
 .btn {
   width: 5rem;
 }
 
+/* Pone los contenedores en el centro */
 .contenedorCentro {
   width: 88%;
   font-size: 14px;
@@ -13,16 +15,123 @@
   margin-bottom: 5%;
 }
 
+/* Modifica algunos estilos del BootStrap */
 th {
   font-size: 16px;
 }
 
+.carritoLink:hover {
+  background-color: #0087ffbd;
+}
+
+.navbar-nav .dropdown-menu {
+  position: absolute;
+}
+
+/* Para que el footer esté siempre abajo */
+.bodyColumn {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.contentColumn {
+  flex: 1;
+}
+
+.footerAbsolute {
+  min-height: 50px;
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+}
+
+/* Decoración de los links de footer */
+a.aNoDec {
+  text-decoration: none;
+  color: white;
+}
+
+a.aNoDecFollow {
+  text-decoration: none;
+  color: #39c8e2;
+}
+
+/* Quita los márgenes innecesarios */
+.noMargin {
+  margin: 0;
+}
+
+/* Estilo de userEmail */
+.userEmail {
+  list-style: none;
+  margin-right: 5rem;
+}
+
+.loginAbsolute {
+  position: absolute;
+  top: 0.5rem;
+  right: 2rem;
+}
+
+/* Imagen del carousel */
+.imgCarousel{
+  height: 30rem;
+}
+
 /* Tamaño lg */
 @media only screen and (min-width: 992px) {
+  .usuarioAbsolute {
+    position: absolute;
+    top: 1rem;
+    right: 5rem;
+  }
+
+  /* Modifica constantemente el tamaño del tab */
+  .sizeTab {
+    width: 50%;
+    margin-top: 5%;
+    margin-left: 20%;
+  }
 }
 
 /* Tamaño md */
 @media only screen and (min-width: 768px) and (max-width: 992px) {
+  .usuarioAbsolute {
+    position: absolute;
+    top: 1rem;
+    right: 3.5rem;
+  }
+
+  /* Modifica constantemente el tamaño del tab */
+  .sizeTab {
+    width: 50%;
+    margin-top: 4%;
+    margin-left: 18%;
+  }
+}
+
+/* Tamaño md */
+@media only screen and (min-width: 576px) and (max-width: 768px) {
+  .usuarioAbsolute {
+    position: absolute;
+    top: 1rem;
+    right: 3.25rem;
+  }
+
+  a.aNoDec {
+    font-size: 15px;
+  }
+
+  .container {
+    font-size: 12.65px;
+  }
+
+  /* Modifica constantemente el tamaño del tab */
+  .sizeTab {
+    width: 50%;
+    margin-top: 4%;
+    margin-left: 28%;
+  }
 }
 
 /* Tamaño sm */
@@ -34,5 +143,48 @@ th {
   input.login {
     width: 110%;
     margin-left: -5%;
+  }
+
+  .usuarioAbsolute {
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+  }
+
+  a.aNoDec {
+    font-size: 15px;
+  }
+
+  .container {
+    font-size: 12.65px;
+  }
+
+  .txtIzq {
+    text-align: left !important;
+  }
+
+  a.aNoDecFollow {
+    font-size: 12.65px;
+  }
+
+  /* Modifica constantemente el tamaño del tab */
+  .sizeTab {
+    width: 100%;
+    margin-top: 10%;
+    padding-right: 10%;
+  }
+
+  .userEmail {
+    margin-left: -1.5rem;
+    margin-right: 2.5rem;
+  }
+
+  .carritoLink {
+    width: 3rem;
+    text-align: center;
+  }
+
+  .txtCarrito {
+    display: none;
   }
 }

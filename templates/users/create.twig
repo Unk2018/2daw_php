@@ -1,12 +1,19 @@
 {# Enlazar este fichero con la plantilla correspondiente #}
-{% extends 'layouts/users.twig' %}
+{% extends 'layouts/admin.twig' %}
 
 {% block title %}
   Create
 {% endblock %}
 
 {% block content %}
-  <a class="btn btn-primary" href="http://localhost/2daw-clase/?controller=users&action=index">Index</a>
+  <ul class="nav nav-tabs justify-content-end sizeTab">
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="{{ url }}users/index">Index</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="#">Agregar usuario</a>
+    </li>
+  </ul>
 
   <!-- action = URL?controller=user&action=save -->
   <!-- Eso quiere decir que llama al controlador user e intenta ejecutar el método save -->

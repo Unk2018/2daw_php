@@ -1,5 +1,5 @@
 {# Enlazar este fichero con la plantilla correspondiente #}
-{% extends 'layouts/users.twig' %}
+{% extends 'layouts/admin.twig' %}
 
 {% block title %}
   SHOW
@@ -10,7 +10,15 @@
 {% endblock %}
 
 {% block content %}
-  <a href="http://localhost/2daw-clase/?controller=users&action=index" class="btn btn-primary">Atras</a>
+  <ul class="nav nav-tabs justify-content-end sizeTab">
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="{{ url }}users/index">Index</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url }}users/create">Agregar usuario</a>
+    </li>
+  </ul>
+
   <div class="row m-0 p-0 justify-content-center mb-3">
     <div class="col-6 row">
       <div class="mb-3">
@@ -19,22 +27,18 @@
       <div class="mb-3">
         <label for="nombre" class="form-label">Nombre</label>
         <input type="text" class="form-control" id="nombre" name="nombre" value="{{ user.nombre }}" aria-describedby="nombre" readonly />
-        <div id="nombre" class="form-text">Escribe nombre.</div>
       </div>
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
         <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" aria-describedby="email" readonly />
-        <div id="email" class="form-text">Escribe email.</div>
       </div>
       <div class="mb-3">
         <label for="id_rol" class="form-label">Id_rol</label>
         <input type="text" class="form-control" id="id_rol" value="{{ user.id_rol }}" name="id_rol" aria-describedby="id_rol" readonly />
-        <div id="id_rol" class="form-text">Escribe Id_rol.</div>
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
         <input type="password" class="form-control" id="password" name="password" value="{{ user.password }}" aria-describedby="password" readonly />
-        <div id="password" class="form-text">Escribe password.</div>
       </div>
     </div>
   </div>

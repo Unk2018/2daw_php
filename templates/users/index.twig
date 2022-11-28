@@ -1,18 +1,23 @@
 {# Enlazar este fichero con la plantilla correspondiente #}
-{% extends 'layouts/users.twig' %}
+{% extends 'layouts/admin.twig' %}
 
 {% block title %}
   Index
 {% endblock %}
 
 {% block content %}
-  <a class="btn btn-primary" href="http://localhost/2daw-clase/?controller=users&action=create">Agregar usuario</a>
-  <a href="{{url}}auth/login" class="btn btn-primary">Login</a>
-  <a href="#" class="btn btn-primary">Register</a>
+  <ul class="nav nav-tabs justify-content-end sizeTab">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="#">Index</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url }}users/create">Agregar usuario</a>
+    </li>
+  </ul>
 
-  <!-- Tabla responsive. Hace que puedas hacer scroll horizontal (dependiendo del table-responsive 
+  <!--   Tabla responsive. Hace que puedas hacer scroll horizontal (dependiendo del table-responsive 
   introducido, te permitirá hacer scroll dependiendo del tamaño y cuando se pueda, es decir, cuando empieza
-  a comerse contenido a partir de cierto tamaño) -->
+  a comerse contenido a partir de cierto tamaño)   -->
   <div class="table-responsive">
     <table class="table table-striped table-responsive-md table-responsive-sm text-center mt-4 contenedorCentro">
       <thead>

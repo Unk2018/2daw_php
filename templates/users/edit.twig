@@ -1,5 +1,5 @@
 {# Enlazar este fichero con la plantilla correspondiente #}
-{% extends 'layouts/users.twig' %}
+{% extends 'layouts/admin.twig' %}
 
 {% block title %}
   EDIT
@@ -10,9 +10,18 @@
 {% endblock %}
 
 {% block content %}
+  <ul class="nav nav-tabs justify-content-end sizeTab">
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="{{url}}users/index">Index</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url }}users/create">Agregar usuario</a>
+    </li>
+  </ul>
+
   <form action="http://localhost/2daw-clase/?controller=users&action=update" method="POST">
     <div class="row m-0 p-0 justify-content-center mb-3">
-      <div class="col-6 row">
+      <div class="col-6 justify-content-center row">
         <div class="mb-3">
           <input type="hidden" class="form-control" id="id" name="id" value="{{ user.id_usuario }}" aria-describedby="id" />
         </div>
