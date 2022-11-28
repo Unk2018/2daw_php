@@ -74,8 +74,12 @@ a.aNoDecFollow {
 }
 
 /* Imagen del carousel */
-.imgCarousel{
+.imgCarousel {
   height: 30rem;
+}
+
+.btnContactos {
+  width: 6rem;
 }
 
 /* Tamaño lg */
