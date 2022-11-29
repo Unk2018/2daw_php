@@ -2,49 +2,30 @@
 {% extends 'layouts/admin.twig' %}
 
 {% block title %}
-  EDIT producto
-{% endblock %}
-
-{% block header %}
-  <h1>EDIT</h1>
+  EDIT genre
 {% endblock %}
 
 {% block content %}
   <ul class="nav nav-tabs justify-content-end sizeTab">
     <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="{{ url }}producto/index">Index</a>
+      <a class="nav-link" aria-current="page" href="{{ url }}genre/index">Index</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{{ url }}producto/create">Agregar producto</a>
+      <a class="nav-link" href="{{ url }}genre/create">Agregar genre</a>
     </li>
   </ul>
 
-  <form action="{{ url }}producto/update" method="POST">
+  <form action="{{ url }}genre/update" method="POST">
     <div class="row m-0 p-0 justify-content-center mb-3">
       <!-- Coloca el botón en el centro -->
       <div class="col-12 col-lg-4 col-md-5 col-sm-6 justify-content-center row">
         <div class="mb-3">
-          <input type="hidden" class="form-control" id="id" name="id" value="{{ producto.id_producto }}" aria-describedby="id" />
-        </div>
-        <div class="mb-3">
-          <label for="id_genre" class="form-label">Id_genre</label>
-          <input type="number" class="form-control" id="id_genre" name="id_genre" value="{{ producto.id_genre }}" aria-describedby="id_genre" />
-          <div id="id_genreLab" class="form-text">Introduce id_genre.</div>
+          <input type="hidden" class="form-control" id="id" name="id" value="{{ genre.id_genre }}" aria-describedby="id" />
         </div>
         <div class="mb-3">
           <label for="nombre" class="form-label">Nombre</label>
-          <input type="text" class="form-control" id="nombre" name="nombre" value="{{ producto.nombre }}" aria-describedby="nombre" />
+          <input type="text" class="form-control" id="nombre" name="nombre" value="{{ genre.nombre }}" aria-describedby="nombre" />
           <div id="nombreLab" class="form-text">Escribe nombre.</div>
-        </div>
-        <div class="mb-3">
-          <label for="cantidad" class="form-label">Cantidad</label>
-          <input type="number" class="form-control" id="cantidad" value="{{ producto.cantidad }}" name="cantidad" aria-describedby="cantidad" />
-          <div id="cantidadLab" class="form-text">Introduce cantidad.</div>
-        </div>
-        <div class="mb-3">
-          <label for="precio" class="form-label">Precio</label>
-          <input type="number" class="form-control" id="precio" name="precio" value="{{ producto.precio }}" aria-describedby="precio" />
-          <div id="precioLab" class="form-text">Introduce precio.</div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </div>

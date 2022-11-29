@@ -1,0 +1,23 @@
+{# Enlazar este fichero con la plantilla correspondiente #}
+{% extends 'layouts/public.twig' %}
+
+{% block title %}
+  Public producto
+{% endblock %}
+
+{% block content %}
+  <div class="mt-5">
+    {# Bucle en Twig #}
+    {% for p in producto %}
+      {{ p.id_producto }}
+      {{ p.id_genre }}
+      {{ p.nombre }}
+      {{ p.cantidad }}
+      {{ p.precio }}€
+    {% else %}
+      <li>
+        <em>No se encuentran productos</em>
+      </li>
+    {% endfor %}
+  </div>
+{% endblock %}

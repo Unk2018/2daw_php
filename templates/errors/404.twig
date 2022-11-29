@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ERROR 404!</title>
-  </head>
+{# Enlazar este fichero con la plantilla correspondiente #}
+{% extends 'layouts/error.twig' %}
 
-  <body>
-    <h1>ERROR 404</h1>
-  </body>
-</html>
+{% block title %}
+  ERROR 404!
+{% endblock %}
+
+{% block content %}
+  <div class="mt-5 text-center">
+    <h1 class="text-danger">ERROR 404</h1>
+    <h3 class="mt-5">No se pudo encontrar la página.</h3>
+  </div>
+{% endblock %}

@@ -23,31 +23,25 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Id_genre</th>
           <th scope="col">Nombre</th>
-          <th scope="col">Cantidad</th>
-          <th scope="col">Precio</th>
           <th scope="col">Acciones</th>
         </tr>
       </thead>
       <tbody>
         {# Bucle en Twig #}
-        {% for p in producto %}
+        {% for g in genre %}
           <tr>
-            <td>{{ p.id_producto }}</td>
-            <td>{{ p.id_genre }}</td>
-            <td>{{ p.nombre }}</td>
-            <td>{{ p.cantidad }}</td>
-            <td>{{ p.precio }}</td>
+            <td>{{ g.id_genre }}</td>
+            <td>{{ g.nombre }}</td>
             <td>
-              <a class="btn btn-success" href="{{ url }}producto/show&id={{ p.id_producto }}">Ver</a>
-              <a class="btn btn-secondary" href="{{ url }}producto/edit&id={{ p.id_producto }}">Editar</a>
-              <a class="btn btn-danger" href="{{ url }}producto/delete&id={{ p.id_producto }}">Eliminar</a>
+              <a class="btn btn-success" href="{{ url }}genre/show&id={{ g.id_genre }}">Ver</a>
+              <a class="btn btn-secondary" href="{{ url }}genre/edit&id={{ g.id_genre }}">Editar</a>
+              <a class="btn btn-danger" href="{{ url }}genre/delete&id={{ g.id_genre }}">Eliminar</a>
             </td>
           </tr>
         {% else %}
           <li>
-            <em>No se encuentran productos</em>
+            <em>No se encuentran tipo de producto</em>
           </li>
         {% endfor %}
       </tbody>

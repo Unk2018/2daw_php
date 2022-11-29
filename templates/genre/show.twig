@@ -2,20 +2,16 @@
 {% extends 'layouts/admin.twig' %}
 
 {% block title %}
-  SHOW producto
-{% endblock %}
-
-{% block header %}
-  <h1>SHOW</h1>
+  SHOW genre
 {% endblock %}
 
 {% block content %}
   <ul class="nav nav-tabs justify-content-end sizeTab">
     <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="{{ url }}producto/index">Index</a>
+      <a class="nav-link" aria-current="page" href="{{ url }}genre/index">Index</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{{ url }}producto/create">Agregar producto</a>
+      <a class="nav-link" href="{{ url }}genre/create">Agregar genre</a>
     </li>
   </ul>
   
@@ -23,19 +19,11 @@
     <div class="col-12 col-lg-4 col-md-5 col-sm-6 row">
       <div class="mb-3">
         <label for="id_genre" class="form-label">Id_genre</label>
-        <input type="text" class="form-control" id="id_genre" name="id_genre" value="{{ producto.id_genre }}" aria-describedby="id_genre" readonly />
+        <input type="text" class="form-control" id="id_genre" name="id_genre" value="{{ genre.id_genre }}" aria-describedby="id_genre" readonly />
       </div>
       <div class="mb-3">
         <label for="nombre" class="form-label">Nombre</label>
-        <input type="nombre" class="form-control" id="nombre" name="nombre" value="{{ producto.nombre }}" aria-describedby="nombre" readonly />
-      </div>
-      <div class="mb-3">
-        <label for="cantidad" class="form-label">Cantidad</label>
-        <input type="text" class="form-control" id="cantidad" value="{{ producto.cantidad }}" name="cantidad" aria-describedby="cantidad" readonly />
-      </div>
-      <div class="mb-3">
-        <label for="precio" class="form-label">Precio</label>
-        <input type="number" class="form-control" id="precio" name="precio" value="{{ producto.precio }}" aria-describedby="precio" readonly />
+        <input type="nombre" class="form-control" id="nombre" name="nombre" value="{{ genre.nombre }}" aria-describedby="nombre" readonly />
       </div>
     </div>
   </div>

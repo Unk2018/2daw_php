@@ -5,9 +5,9 @@
     RewriteEngine on
 
     # Redireccion de errores (me creo unas vistas twig para lanzar los errores)
-    ErrorDocument 404 http://localhost/2daw-clase/templates/errors/404.twig
-    ErrorDocument 403 http://localhost/2daw-clase/templates/errors/403.twig
-    ErrorDocument 500 http://localhost/2daw-clase/templates/errors/500.twig
+    ErrorDocument 404 http://localhost/2daw-clase/templates/error/_404
+    ErrorDocument 403 http://localhost/2daw-clase/templates/error/_403
+    ErrorDocument 500 http://localhost/2daw-clase/templates/error/_500
 
     # No voy a poder cargar un directorio (!-d) y tampoco un fichero (!-f) cualquiera
     RewriteCond %{SCRIPT_FILENAME} !-d

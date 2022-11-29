@@ -1,13 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ERROR 500!</title>
-  </head>
+{# Enlazar este fichero con la plantilla correspondiente #}
+{% extends 'layouts/error.twig' %}
 
-  <body>
-    <h1>ERROR 500</h1>
-  </body>
-</html>
+{% block title %}
+  ERROR 500!
+{% endblock %}
+
+{% block content %}
+  <div class="mt-5 text-center">
+    <h1 class="text-danger">ERROR 500</h1>
+    <h3 class="mt-5">
+      Hubo un error a la hora de hacer la petición al servidor.
+      <br /> Por favor, intentelo más tarde.
+    </h3>
+  </div>
+{% endblock %}

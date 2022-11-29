@@ -22,13 +22,13 @@ class ProductoController implements Controller
                 ]
             );
 
-            // Si es un cliente
+            // Si es un cliente (muestra todos los productos)
         } else if (isset($_SESSION['identity'])) {
             header('Location: ' . url . 'producto/welcome');
 
-            // Si es cualquiera sin registrarse
+            // Si es cualquiera sin registrarse (muestra todos los productos)
         } else {
-            header('Location: ' . url . 'auth/seePublic');
+            header('Location: ' . url . 'producto/seePublic');
         }
     }
 
@@ -186,10 +186,34 @@ class ProductoController implements Controller
     // Mira todos los productos (público)
     public static function seePublic()
     {
+        // Te envia a la vista pública de los listados de productos (sin opción de compra hasta
+        // que te hayas logueado)
+        $producto = new Producto();
+
+        echo $GLOBALS["twig"]->render(
+            'products.twig',
+            [
+                'producto' => $producto->findAll(),
+                'url' => url
+            ]
+        );
     }
 
     // Mira todos los productos (cliente)
     public static function welcome()
     {
+        // Si es un cliente (muestra todos los productos)
+        if (isset($_SESSION['identity'])) {
+            $producto = new Producto();
+
+            echo $GLOBALS["twig"]->render(
+                'producto/welcome.twig',
+                [
+                    'producto' => $producto->findAll(),
+                    'identity' => $_SESSION['identity'],
+                    'url' => url
+                ]
+            );
+        }
     }
 }
