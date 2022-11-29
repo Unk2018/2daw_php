@@ -2,7 +2,7 @@
 
 class ErrorController
 {
-    // Redirigir a vista error 404
+    // Redirigir a vista error 404 (no encontrado)
     public static function _404()
     {
         echo $GLOBALS['twig']->render(
@@ -13,7 +13,7 @@ class ErrorController
         );
     }
 
-    // Redirigir a vista error 403
+    // Redirigir a vista error 403 (solicitud denegada)
     public static function _403()
     {
         echo $GLOBALS['twig']->render(
@@ -24,7 +24,7 @@ class ErrorController
         );
     }
 
-    // Redirigir a vista error 500
+    // Redirigir a vista error 500 (petición error)
     public static function _500()
     {
         echo $GLOBALS['twig']->render(

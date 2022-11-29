@@ -4,7 +4,7 @@ require_once 'models/User.php';
 class UsersController implements Controller
 {
     /**
-     * 
+     * Index que determina si vas o al error o a otra página (login)
      */
     public static function index()
     {
@@ -18,6 +18,12 @@ class UsersController implements Controller
                     'url' => url
                 ]
             );
+
+            // Si no tiene permiso, te dirige al error 403
+        } else if (isset($_SESSION['identity'])) {
+            header('Location: ' . url . 'error/_403');
+
+            // Te dirige al login
         } else {
             header('Location: ' . url . 'auth/login');
         }
@@ -37,13 +43,19 @@ class UsersController implements Controller
                     'url' => url
                 ]
             );
+
+            // Si no tiene permiso, te dirige al error 403
+        } else if (isset($_SESSION['identity'])) {
+            header('Location: ' . url . 'error/_403');
+
+            // Te dirige al login
         } else {
             header('Location: ' . url . 'auth/login');
         }
     }
 
     /**
-     * 
+     * Muestra al usuario seleccionado
      */
     public static function show()
     {
@@ -58,13 +70,19 @@ class UsersController implements Controller
                     'url' => url
                 ]
             );
+
+            // Si no tiene permiso, te dirige al error 403
+        } else if (isset($_SESSION['identity'])) {
+            header('Location: ' . url . 'error/_403');
+
+            // Te dirige al login
         } else {
             header('Location: ' . url . 'auth/login');
         }
     }
 
     /**
-     * 
+     * Edita usuario seleccionado
      */
     public static function edit()
     {
@@ -79,6 +97,12 @@ class UsersController implements Controller
                     'url' => url
                 ]
             );
+
+            // Si no tiene permiso, te dirige al error 403
+        } else if (isset($_SESSION['identity'])) {
+            header('Location: ' . url . 'error/_403');
+
+            // Te dirige al login
         } else {
             header('Location: ' . url . 'auth/login');
         }
@@ -99,13 +123,19 @@ class UsersController implements Controller
             }
             $user->save($user);
             header('Location: ' . url . 'users/index');
+
+            // Si no tiene permiso, te dirige al error 403
+        } else if (isset($_SESSION['identity'])) {
+            header('Location: ' . url . 'error/_403');
+
+            // Te dirige al login
         } else {
             header('Location: ' . url . 'auth/login');
         }
     }
 
     /**
-     * 
+     * Actualiza el usuario seleccionado
      */
     public static function update()
     {
@@ -120,20 +150,32 @@ class UsersController implements Controller
             }
             $user->update();
             header('Location: ' . url . 'users/index');
+
+            // Si no tiene permiso, te dirige al error 403
+        } else if (isset($_SESSION['identity'])) {
+            header('Location: ' . url . 'error/_403');
+
+            // Te dirige al login
         } else {
             header('Location: ' . url . 'auth/login');
         }
     }
     /**
-     * 
+     * Eliminado usuario seleccionado
      */
     public static function delete()
     {
-        if (isset($_SESSION['identity'])) {
+        if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
             $user = new User();
             $user->setId_usuario($_GET['id']);
             $user->delete();
             header('Location: ' . url . 'users/index');
+
+            // Si no tiene permiso, te dirige al error 403
+        } else if (isset($_SESSION['identity'])) {
+            header('Location: ' . url . 'error/_403');
+
+            // Te dirige al login
         } else {
             header('Location: ' . url . 'auth/login');
         }

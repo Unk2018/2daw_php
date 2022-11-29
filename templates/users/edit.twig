@@ -12,37 +12,39 @@
 {% block content %}
   <ul class="nav nav-tabs justify-content-end sizeTab">
     <li class="nav-item">
-      <a class="nav-link" aria-current="page" href="{{url}}users/index">Index</a>
+      <a class="nav-link" aria-current="page" href="{{ url }}users/index">Index</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{{ url }}users/create">Agregar usuario</a>
     </li>
   </ul>
 
-  <form action="http://localhost/2daw-clase/?controller=users&action=update" method="POST">
+  <form action="{{ url }}users/update" method="POST">
     <div class="row m-0 p-0 justify-content-center mb-3">
-      <div class="col-6 justify-content-center row">
+      <div class="col-12 col-lg-4 col-md-5 col-sm-6 justify-content-center row">
         <div class="mb-3">
-          <input type="hidden" class="form-control" id="id" name="id" value="{{ user.id_usuario }}" aria-describedby="id" />
+          <input type="hidden" class="form-control" id="id" name="id" value="{{ user.id_usuario }}" aria-describedby="id" required />
         </div>
         <div class="mb-3">
           <label for="nombre" class="form-label">Nombre</label>
-          <input type="text" class="form-control" id="nombre" name="nombre" value="{{ user.nombre }}" aria-describedby="nombre" />
+          <input type="text" class="form-control" id="nombre" name="nombre" value="{{ user.nombre }}" aria-describedby="nombre" required />
           <div id="nombre" class="form-text">Escribe nombre.</div>
         </div>
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" aria-describedby="email" />
+          <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" aria-describedby="email" required />
           <div id="email" class="form-text">Escribe email.</div>
         </div>
         <div class="mb-3">
           <label for="id_rol" class="form-label">Id_rol</label>
-          <input type="text" class="form-control" id="id_rol" value="{{ user.id_rol }}" name="id_rol" aria-describedby="id_rol" />
+          <input type="number" class="form-control" id="id_rol" value="{{ user.id_rol }}" name="id_rol" aria-describedby="id_rol" required />
           <div id="id_rol" class="form-text">Escribe Id_rol.</div>
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password" name="password" value="{{ user.password }}" aria-describedby="password" />
+          <!-- Está vacío porque si no se hace un nuevo encrypt de la password a partir de la cifrada en
+          vez de la nueva introducida (si es que lo cambias claro)    -->
+          <input type="password" class="form-control" id="password" name="password" value="" aria-describedby="password" required />
           <div id="password" class="form-text">Escribe password.</div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>

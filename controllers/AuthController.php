@@ -5,12 +5,18 @@ class AuthController
     /* Función para redirigir al login */
     public function login()
     {
-        echo $GLOBALS['twig']->render(
-            'auth/login_register.twig',
-            [
-                'url' => url
-            ]
-        );
+        if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
+            header('Location: ' . url . 'auth/home');
+        } else if (isset($_SESSION['identity'])) {
+            header('Location: ' . url . 'index/index');
+        } else {
+            echo $GLOBALS['twig']->render(
+                'auth/login_register.twig',
+                [
+                    'url' => url
+                ]
+            );
+        }
     }
 
     public function doLogin()
@@ -48,7 +54,7 @@ class AuthController
 
     public function home()
     {
-        if (isset($_SESSION['identity'])) {
+        if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
             echo $GLOBALS['twig']->render(
                 'home.twig',
                 [
@@ -57,7 +63,7 @@ class AuthController
                 ]
             );
         } else {
-            header('Location: ' . url . 'auth/login');
+            header('Location: ' . url . 'index/index');
         }
     }
 
@@ -79,7 +85,7 @@ class AuthController
     public static function welcome()
     {
         // Si hay una sesión iniciada, entonces quita 'identity'
-        if (isset($_SESSION['identity'])) {
+        if (isset($_SESSION['identity']) && !isset($_SESSION['admin'])) {
             echo $GLOBALS['twig']->render(
                 'welcome.twig',
                 [
@@ -88,12 +94,7 @@ class AuthController
                 ]
             );
         } else {
-            echo $GLOBALS['twig']->render(
-                'index.twig',
-                [
-                    'url' => url
-                ]
-            );
+            header('Location: ' . url . 'index/index');
         }
     }
 
@@ -112,14 +113,20 @@ class AuthController
         if (isset($_POST['passwordReg'])) {
             $user->setPassword(password_hash($_POST['passwordReg'], PASSWORD_BCRYPT, ['cont' => 4]));
         }
-        $user->register(); // Método register del model User
 
-        // Registra los datos después y te manda/recarga página después de pasar los datos
-        echo $GLOBALS['twig']->render(
-            'auth/login_register.twig',
-            [
-                'url' => url
-            ]
-        );
+        // Solo registra si no está iniciada sesión
+        if (isset($_SESSION['identity'])) {
+            header('Location: ' . url . 'index/index');
+        } else {
+            $user->register(); // Método register del model User
+
+            // Registra los datos después y te manda/recarga página después de pasar los datos
+            echo $GLOBALS['twig']->render(
+                'auth/login_register.twig',
+                [
+                    'url' => url
+                ]
+            );
+        }
     }
 }

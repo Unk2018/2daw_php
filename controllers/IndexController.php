@@ -11,6 +11,7 @@ class IndexController
                 echo $GLOBALS['twig']->render(
                     'home.twig',
                     [
+                        'identity' => $_SESSION['identity'],
                         'url' => url
                     ]
                 );
@@ -22,6 +23,7 @@ class IndexController
                 echo $GLOBALS['twig']->render(
                     'welcome.twig',
                     [
+                        'identity' => $_SESSION['identity'],
                         'url' => url
                     ]
                 );

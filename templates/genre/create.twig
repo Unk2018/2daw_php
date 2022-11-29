@@ -2,21 +2,21 @@
 {% extends 'layouts/admin.twig' %}
 
 {% block title %}
-  Create producto
+  Create genre
 {% endblock %}
 
 {% block content %}
   <ul class="nav nav-tabs justify-content-end sizeTab">
     <li class="nav-item">
-      <a class="nav-link" aria-current="page" href="{{ url }}producto/index">Index</a>
+      <a class="nav-link" aria-current="page" href="{{ url }}genre/index">Index</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" href="#">Agregar producto</a>
+      <a class="nav-link active" href="#">Agregar genero</a>
     </li>
   </ul>
 
   <!-- Eso quiere decir que llama al controlador user e intenta ejecutar el método save -->
-  <form action="{{ url }}producto/save" method="POST">
+  <form action="{{ url }}genre/save" method="POST">
     <div class="row m-0 p-0 justify-content-center mt-4 mb-4">
       <div class="col-12 col-lg-4 col-md-5 col-sm-6 row justify-content-center">
         <div class="mb-3">
