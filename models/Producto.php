@@ -106,6 +106,11 @@ class Producto implements Model
         $db = Database::conectar();
         $delete = $db->query("DELETE FROM producto WHERE id_producto=$this->id_producto");
     }
-}
 
-?>
+    public function findAllWithGenre()
+    {
+        $db = Database::conectar();
+        $findWithGenre = $db->query("Select * from producto as p join genre as g where p.id_genre = g.id_genre;");
+        return $findWithGenre;
+    }
+}

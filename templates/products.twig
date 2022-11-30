@@ -6,18 +6,28 @@
 {% endblock %}
 
 {% block content %}
-  <div class="mt-5">
-    {# Bucle en Twig #}
-    {% for p in producto %}
-      {{ p.id_producto }}
-      {{ p.id_genre }}
-      {{ p.nombre }}
-      {{ p.cantidad }}
-      {{ p.precio }}€
-    {% else %}
-      <li>
-        <em>No se encuentran productos</em>
-      </li>
-    {% endfor %}
+  <div class="mt-5 container">
+    <!-- 3 productos por columna (grande), 1 o 2 producto/s por columna (pequeño) -->
+    <div class="row row-cols-6 justify-content-center">
+      {# Bucle en Twig #}
+      {% for p in producto %}
+        <div class="card mt-5 ms-5 text-center cardSize">
+          <img src="/2daw-clase/assets/img/game.jpg" class="card-img-top" />
+          <div class="card-body">
+            <h5 class="card-title">{{ p.nombre }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Tipo: {{ p.tipo }}</h6>
+          </div>
+          <!-- Agrupa en una lista la cantidad y el precio -->
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Cantidad: {{ p.cantidad }}</li>
+            <li class="list-group-item">Precio: {{ p.precio }}€</li>
+          </ul>
+        </div>
+      {% else %}
+        <li>
+          <em>No se encuentran productos</em>
+        </li>
+      {% endfor %}
+    </div>
   </div>
 {% endblock %}

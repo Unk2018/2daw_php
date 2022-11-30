@@ -5,10 +5,15 @@ class AuthController
     /* Función para redirigir al login */
     public function login()
     {
+        // Si es admin entonces te lleva al home de admin
         if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
             header('Location: ' . url . 'auth/home');
+
+            // Te lleva al index donde luego te llevará a la vista de cliente
         } else if (isset($_SESSION['identity'])) {
             header('Location: ' . url . 'index/index');
+
+            // Te manda al login
         } else {
             echo $GLOBALS['twig']->render(
                 'auth/login_register.twig',

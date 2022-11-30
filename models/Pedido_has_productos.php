@@ -1,10 +1,10 @@
 <?php
 class Pedido_has_productos implements Model
 {
-    private $pedido;
-    private $producto;
-    private $unidades;
-    private $precio;
+    private $pedido; // id_pedido
+    private $producto; // id_producto
+    private $unidades; // int
+    private $precio; // double
 
     /**
      * Class constructor.

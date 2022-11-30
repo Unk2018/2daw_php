@@ -2,9 +2,15 @@
   margin: 0;
 }
 
+/* Añade un min-width por lo que los elementos de dentro no se hacen más pequeños a partir de cierto
+tamaño */
+body {
+  min-width: 280px;
+}
+
 /* Modifica el tamaño de los botones (sobre todo los de edit, eliminar y show) */
-.btn {
-  width: 5rem;
+.btnSize {
+  width: 4.96rem;
 }
 
 /* Pone los contenedores en el centro */
@@ -82,8 +88,13 @@ a.aNoDecFollow {
   width: 6rem;
 }
 
+.cardSize {
+  width: 18rem;
+}
+
 /* Tamaño lg */
 @media only screen and (min-width: 992px) {
+  /* Coloca el email (usuario iniciado) arriba del todo */
   .usuarioAbsolute {
     position: absolute;
     top: 1rem;
@@ -100,6 +111,7 @@ a.aNoDecFollow {
 
 /* Tamaño md */
 @media only screen and (min-width: 768px) and (max-width: 992px) {
+  /* Coloca el email (usuario iniciado) arriba del todo */
   .usuarioAbsolute {
     position: absolute;
     top: 1rem;
@@ -116,16 +128,20 @@ a.aNoDecFollow {
 
 /* Tamaño md */
 @media only screen and (min-width: 576px) and (max-width: 768px) {
+  /* Coloca el email (usuario iniciado) arriba del todo */
   .usuarioAbsolute {
     position: absolute;
     top: 1rem;
     right: 3.25rem;
   }
 
+  /* Cambia tamaño de la letra del contenido del footer */
   a.aNoDec {
     font-size: 15px;
   }
 
+  /* Aprovecha el container del BootStrap para cambiar el tamano de la letra dentro de los elementos
+  de la etiqueta */
   .container {
     font-size: 12.65px;
   }
@@ -144,29 +160,36 @@ a.aNoDecFollow {
     font-size: 10px;
   }
 
+  /* Tamaño del input */
   input.login {
     width: 110%;
     margin-left: -5%;
   }
 
+  /* Coloca el email (usuario iniciado) arriba del todo */
   .usuarioAbsolute {
     position: absolute;
     top: 1rem;
     right: 2rem;
   }
 
+  /* Cambia tamaño de la letra del contenido del footer */
   a.aNoDec {
     font-size: 15px;
   }
 
+  /* Aprovecha el container del BootStrap para cambiar el tamano de la letra dentro de los elementos
+  de la etiqueta */
   .container {
     font-size: 12.65px;
   }
 
+  /* Pone el texto a la izquierda (footer) */
   .txtIzq {
     text-align: left !important;
   }
 
+  /* Modificación del link de follow */
   a.aNoDecFollow {
     font-size: 12.65px;
   }
@@ -178,17 +201,25 @@ a.aNoDecFollow {
     padding-right: 10%;
   }
 
+  /* Espacio del usuario Email */
   .userEmail {
     margin-left: -1.5rem;
     margin-right: 2.5rem;
   }
 
+  /* Agranda el espacio para pulsar el carro */
   .carritoLink {
     width: 3rem;
     text-align: center;
   }
 
+  /* Cuando es lo suficientemente pequeño, se quita la letra del carrito */
   .txtCarrito {
     display: none;
+  }
+
+  /* Cambia el margin left originalmente puesto en la card (ms-5 del Bootstrap) */
+  .cardSize {
+    margin-left: 0px !important;
   }
 }

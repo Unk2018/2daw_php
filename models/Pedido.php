@@ -48,13 +48,28 @@ class Pedido implements Model
     {
     }
 
+    // Busca por el id del pedido seleccionado
     public function findById()
     {
+        $db = Database::conectar();
+        $findById = $db->query("SELECT pedido.id_usuario, pedido.fecha, producto.nombre AS nombre_producto, pedido_has_productos.*
+        FROM ((pedido
+        INNER JOIN pedido_has_productos ON pedido.id_pedido = pedido_has_productos.id_pedido)
+        INNER JOIN producto ON producto.id_producto = pedido_has_productos.id_producto)
+        WHERE pedido.id_pedido=$this->id_pedido  AND pedido.id_usuario= $this->usuario;");
+        return $findById;
     }
 
-    // Me devuelve el elemento filtrado por usuario
+    // Me devuelve el elemento filtrado por usuario (todos los pedidod del usuario registrado)
     public function findByUser()
     {
+        $db = Database::conectar();
+        $findByUser = $db->query("SELECT pedido.fecha, pedido_has_productos.id_pedido, sum(pedido_has_productos.unidades * pedido_has_productos.precio) AS total
+        FROM pedido
+        INNER JOIN pedido_has_productos ON pedido.id_pedido = pedido_has_productos.id_pedido
+        WHERE pedido.id_usuario= $this->usuario
+        GROUP BY id_pedido;");
+        return $findByUser;
     }
 
     // Insertar en la base de datos
@@ -62,7 +77,7 @@ class Pedido implements Model
     {
         $db = Database::conectar();
         $save = $db->query("INSERT INTO pedido (id_usuario, fecha) VALUES ('$this->usuario', CURDATE())");
-        return $db->insert_id_pedido;
+        return mysqli_insert_id($db); // Te devuelve la id generada por la query
     }
 
     // Actualizar en la base de datos filtrando por id_pedido

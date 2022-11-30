@@ -3,7 +3,7 @@ class Genre implements Model
 {
 
     private $id_genre;
-    private $nombre;
+    private $tipo;
 
     /**
      * Class constructor.
@@ -17,9 +17,9 @@ class Genre implements Model
         return $this->id_genre;
     }
 
-    function getNombre()
+    function getTipo()
     {
-        return $this->nombre;
+        return $this->tipo;
     }
 
     function setId_genre($id_genre)
@@ -27,9 +27,9 @@ class Genre implements Model
         $this->id_genre = $id_genre;
     }
 
-    function setNombre($nombre)
+    function setTipo($tipo)
     {
-        $this->nombre = $nombre;
+        $this->tipo = $tipo;
     }
 
     // Me va a devolver todos los elementos
@@ -51,14 +51,14 @@ class Genre implements Model
     public function save()
     {
         $db = Database::conectar();
-        $save = $db->query("INSERT INTO genre (nombre) VALUES ('$this->nombre')");
+        $save = $db->query("INSERT INTO genre (tipo) VALUES ('$this->tipo')");
     }
 
     // Actualizar en la base de datos filtrando por id_genre
     public function update()
     {
         $db = Database::conectar();
-        $update = $db->query("UPDATE genre SET nombre='$this->nombre' WHERE id_genre=$this->id_genre");
+        $update = $db->query("UPDATE genre SET tipo='$this->tipo' WHERE id_genre=$this->id_genre");
     }
 
     // Eliminar en la base de datos filtrando por id_genre

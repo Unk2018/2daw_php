@@ -40,13 +40,13 @@
             <td>{{ p.cantidad }}</td>
             <td>{{ p.precio }}€</td>
             <td>
-              <a class="btn btn-success" href="{{ url }}producto/show&id={{ p.id_producto }}">Ver</a>
-              <a class="btn btn-secondary" href="{{ url }}producto/edit&id={{ p.id_producto }}">Editar</a>
-              <a class="btn btn-danger" href="{{ url }}producto/delete&id={{ p.id_producto }}">Eliminar</a>
+              <a class="btn btn-success btnSize" href="{{ url }}producto/show&id={{ p.id_producto }}">Ver</a>
+              <a class="btn btn-secondary btnSize" href="{{ url }}producto/edit&id={{ p.id_producto }}">Editar</a>
+              <a class="btn btn-danger btnSize" href="{{ url }}producto/delete&id={{ p.id_producto }}">Eliminar</a>
             </td>
           </tr>
         {% else %}
-          <li>
+          <li class="text-center mt-5 mb-5 list-unstyled">
             <em>No se encuentran productos</em>
           </li>
         {% endfor %}

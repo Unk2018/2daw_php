@@ -193,7 +193,7 @@ class ProductoController implements Controller
         echo $GLOBALS["twig"]->render(
             'products.twig',
             [
-                'producto' => $producto->findAll(),
+                'producto' => $producto->findAllWithGenre(),
                 'url' => url
             ]
         );
@@ -209,11 +209,13 @@ class ProductoController implements Controller
             echo $GLOBALS["twig"]->render(
                 'producto/welcome.twig',
                 [
-                    'producto' => $producto->findAll(),
+                    'producto' => $producto->findAllWithGenre(),
                     'identity' => $_SESSION['identity'],
                     'url' => url
                 ]
             );
+        } else {
+            header('Location: ' . url . 'producto/index');
         }
     }
 }

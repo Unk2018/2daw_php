@@ -41,13 +41,13 @@
             <td>{{ u.id_rol }}</td>
             <td>{{ u.password }}</td>
             <td>
-              <a class="btn btn-success" href="{{url}}users/show&id={{ u.id_usuario }}">Ver</a>
-              <a class="btn btn-secondary" href="{{url}}users/edit&id={{ u.id_usuario }}">Editar</a>
-              <a class="btn btn-danger" href="{{url}}users/delete&id={{ u.id_usuario }}">Eliminar</a>
+              <a class="btn btn-success btnSize" href="{{url}}users/show&id={{ u.id_usuario }}">Ver</a>
+              <a class="btn btn-secondary btnSize" href="{{url}}users/edit&id={{ u.id_usuario }}">Editar</a>
+              <a class="btn btn-danger btnSize" href="{{url}}users/delete&id={{ u.id_usuario }}">Eliminar</a>
             </td>
           </tr>
         {% else %}
-          <li>
+          <li class="text-center mt-5 mb-5 list-unstyled">
             <em>No se encuentran usuarios</em>
           </li>
         {% endfor %}

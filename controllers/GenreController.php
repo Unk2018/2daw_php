@@ -115,7 +115,7 @@ class GenreController implements Controller
     {
         if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
             $genre = new Genre();
-            $genre->setNombre($_POST['nombre']);
+            $genre->setTipo($_POST['tipo']);
             $genre->save();
             header('Location: ' . url . 'genre/index');
 
@@ -137,7 +137,7 @@ class GenreController implements Controller
         if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
             $genre = new Genre();
             $genre->setId_genre($_POST['id']);
-            $genre->setNombre($_POST['nombre']);
+            $genre->setTipo($_POST['tipo']);
             $genre->update();
             header('Location: ' . url . 'genre/index');
 

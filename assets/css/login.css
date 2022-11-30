@@ -2,31 +2,17 @@
   margin: 0;
 }
 
+/* Estilo del body */
 body {
+  min-width: 280px;
   background: linear-gradient(152deg, #380036 5%, #0cbabaf9 100%);
   background-size: cover;
   background-repeat: no-repeat;
 }
 
-.btn {
-  width: 5rem;
-}
-
+/* Modifica el tag de BootStrap para añadirle background */
 .modal-content {
   background: linear-gradient(152deg, #267aa5 0%, #0cbabaf9 100%);
-}
-
-/* Tamaño lg */
-@media only screen and (min-width: 992px) {
-
-}
-
-/* Tamaño md */
-@media only screen and (min-width: 768px) and (max-width: 992px) {
-}
-
-/* Tamaño tablets más pequeñas */
-@media only screen and (min-width: 576px) and (max-width: 768px) {
 }
 
 /* Tamaño sm */
@@ -35,8 +21,8 @@ body {
     font-size: 12px;
   }
 
+  /* Aprovecha el btn de BootStrap para cambiar el tamaño de la letra dentro del botón */
   .btn {
-    width: 4rem;
     font-size: 12px;
   }
 
