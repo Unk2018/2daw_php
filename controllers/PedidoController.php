@@ -8,6 +8,7 @@ class PedidosController implements Controller
     {
         // Si es cliente
         if (isset($_SESSION['identity']) && !isset($_SESSION['admin'])) {
+            $genre = new Genre();
             $pedido = new Pedido();
             $pedido->setUsuario($_SESSION['identity']->id_usuario);
 
@@ -15,6 +16,7 @@ class PedidosController implements Controller
             echo $GLOBALS['twig']->render(
                 'pedido/index.twig',
                 [
+                    'genre' => $genre->findAll(),
                     'pedidos' => $pedido->findByUser(),
                     'identity' => $_SESSION['identity'],
                     'url' => url
@@ -34,6 +36,7 @@ class PedidosController implements Controller
     public static function show()
     {
         if (isset($_SESSION['identity']) && !isset($_SESSION['admin'])) {
+            $genre = new Genre();
             $pedido = new Pedido();
             $pedido->setId_pedido($_GET['id']);
             $pedido->setUsuario($_SESSION['identity']->id_usuario);
@@ -41,6 +44,7 @@ class PedidosController implements Controller
             echo $GLOBALS['twig']->render(
                 'pedido/show.twig',
                 [
+                    'genre' => $genre->findAll(),
                     'pedido' => $pedido->findById(),
                     'identity' => $_SESSION['identity'],
                     'url' => url

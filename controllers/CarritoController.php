@@ -5,6 +5,7 @@ class CarritoController
     {
         // Si es cliente
         if (isset($_SESSION['identity']) && !isset($_SESSION['admin'])) {
+            $genre = new Genre();
 
             // Asegura de que en el caso de que el carrito del usuario iniciado no exista,
             // entonces se crea y le asigna un valor por defecto (en este caso es null)
@@ -16,6 +17,7 @@ class CarritoController
             echo $GLOBALS['twig']->render(
                 'carrito/index.twig',
                 [
+                    'genre' => $genre->findAll(),
                     'carrito' => $_SESSION['carrito'][$_SESSION['identity']->id_usuario],
                     'identity' => $_SESSION['identity'],
                     'url' => url

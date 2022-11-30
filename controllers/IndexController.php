@@ -3,6 +3,8 @@ class IndexController
 {
     public static function index()
     {
+        $genre = new Genre();
+
         // Mira si ya hay un usuario iniciado (distinguiendo si es admin o no)
         if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
             if ("http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" == url) {
@@ -16,6 +18,8 @@ class IndexController
                     ]
                 );
             }
+
+            // Si es cliente
         } else if (isset($_SESSION['identity'])) {
             if ("http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" == url) {
                 header('Location: ' . url . 'auth/welcome');
@@ -23,11 +27,14 @@ class IndexController
                 echo $GLOBALS['twig']->render(
                     'welcome.twig',
                     [
+                        'genre' => $genre->findAll(),
                         'identity' => $_SESSION['identity'],
                         'url' => url
                     ]
                 );
             }
+
+            // Si es un un usuario público
         } else {
             if ("http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]" == url) {
                 header('Location: ' . url . 'index/index');
@@ -35,6 +42,7 @@ class IndexController
                 echo $GLOBALS['twig']->render(
                     'index.twig',
                     [
+                        'genre' => $genre->findAll(),
                         'url' => url
                     ]
                 );

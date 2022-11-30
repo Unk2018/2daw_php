@@ -186,17 +186,34 @@ class ProductoController implements Controller
     // Mira todos los productos (público)
     public static function seePublic()
     {
+        $genre = new Genre();
         // Te envia a la vista pública de los listados de productos (sin opción de compra hasta
         // que te hayas logueado)
         $producto = new Producto();
 
-        echo $GLOBALS["twig"]->render(
-            'products.twig',
-            [
-                'producto' => $producto->findAllWithGenre(),
-                'url' => url
-            ]
-        );
+        if (isset($_GET['genre'])) {
+            $producto->setId_genre($_GET['genre']);
+
+            echo $GLOBALS["twig"]->render(
+                'products.twig',
+                [
+                    'genre' => $genre->findAll(),
+                    'producto' => $producto->filterByGenre(),
+                    'url' => url
+                ]
+            );
+
+            // Muestra todos los productos
+        } else {
+            echo $GLOBALS["twig"]->render(
+                'products.twig',
+                [
+                    'genre' => $genre->findAll(),
+                    'producto' => $producto->findAllWithGenre(),
+                    'url' => url
+                ]
+            );
+        }
     }
 
     // Mira todos los productos (cliente)
@@ -204,16 +221,37 @@ class ProductoController implements Controller
     {
         // Si es un cliente (muestra todos los productos)
         if (isset($_SESSION['identity'])) {
+            $genre = new Genre();
             $producto = new Producto();
 
-            echo $GLOBALS["twig"]->render(
-                'producto/welcome.twig',
-                [
-                    'producto' => $producto->findAllWithGenre(),
-                    'identity' => $_SESSION['identity'],
-                    'url' => url
-                ]
-            );
+            // Mira si hay id del género de juego. Si no hay te muestra todos los productos.
+            // Si la hay, entonces solo te muestra los productos que se quieran ver
+            if (isset($_GET['genre'])) {
+                $producto->setId_genre($_GET['genre']);
+
+                echo $GLOBALS["twig"]->render(
+                    'producto/welcome.twig',
+                    [
+                        'genre' => $genre->findAll(),
+                        'producto' => $producto->filterByGenre(),
+                        'identity' => $_SESSION['identity'],
+                        'url' => url
+                    ]
+                );
+
+                // Muestra todos los productos
+            } else {
+
+                echo $GLOBALS["twig"]->render(
+                    'producto/welcome.twig',
+                    [
+                        'genre' => $genre->findAll(),
+                        'producto' => $producto->findAllWithGenre(),
+                        'identity' => $_SESSION['identity'],
+                        'url' => url
+                    ]
+                );
+            }
         } else {
             header('Location: ' . url . 'producto/index');
         }

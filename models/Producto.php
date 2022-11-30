@@ -113,4 +113,12 @@ class Producto implements Model
         $findWithGenre = $db->query("Select * from producto as p join genre as g where p.id_genre = g.id_genre;");
         return $findWithGenre;
     }
+
+    public function filterByGenre()
+    {
+        $db = Database::conectar();
+        $findWithGenre = $db->query("Select * from producto as p join genre as g 
+        where p.id_genre = g.id_genre and g.id_genre = $this->id_genre;");
+        return $findWithGenre;
+    }
 }

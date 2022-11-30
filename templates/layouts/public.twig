@@ -27,6 +27,28 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{{ url }}producto/index">Productos</a>
             </li>
+
+            <li class="dropdown nav-item">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Generos</a>
+              <ul class="dropdown-menu">
+                <!-- Recorre todos los géneros existentes -->
+                {% for g in genre %}
+                  <li>
+                    <a class="dropdown-item" href="{{ url }}producto/seePublic&genre={{ g.id_genre }}">{{ g.tipo }}</a>
+                  </li>
+                {% else %}
+                  <li>
+                    <a class="dropdown-item" href="#">Catálogo vacío</a>
+                  </li>
+                {% endfor %}
+                <li>
+                  <hr class="dropdown-divider" />
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{{ url }}users/index">Prueba 403 (irse a users/index siendo cliente)</a>
+                </li>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>

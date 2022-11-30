@@ -30,13 +30,16 @@
             <li class="dropdown nav-item">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Generos</a>
               <ul class="dropdown-menu">
-                <!-- Debería de usarse un for para recorrer todos los géneros existentes -->
-                <li>
-                  <a class="dropdown-item" href="#">Action</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">Another action</a>
-                </li>
+                <!-- Recorre todos los géneros existentes -->
+                {% for g in genre %}
+                  <li>
+                    <a class="dropdown-item" href="{{url}}producto/welcome&genre={{g.id_genre}}">{{g.tipo}}</a>
+                  </li>
+                {% else %}
+                  <li>
+                    <a class="dropdown-item" href="#">Catálogo vacío</a>
+                  </li>
+                {% endfor %}
                 <li>
                   <hr class="dropdown-divider" />
                 </li>
@@ -45,11 +48,6 @@
                 </li>
               </ul>
             </li>
-            <!-- Filtros concadenados (separados por ' | ') -->
-            {#
-            {{ -9800.333|number_format(2, '.', ',') | number_format(2, '.', ',') }}
-            Resultado: -9,800.33 (hasta el segundo ' | ')
-            #}
           </ul>
         </div>
       </div>

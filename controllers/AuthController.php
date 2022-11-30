@@ -91,9 +91,12 @@ class AuthController
     {
         // Si hay una sesión iniciada, entonces quita 'identity'
         if (isset($_SESSION['identity']) && !isset($_SESSION['admin'])) {
+            $genre = new Genre();
+
             echo $GLOBALS['twig']->render(
                 'welcome.twig',
                 [
+                    'genre' => $genre->findAll(),
                     'identity' => $_SESSION['identity'],
                     'url' => url
                 ]
