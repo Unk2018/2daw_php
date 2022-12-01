@@ -12,31 +12,26 @@
 {% block content %}
   <ul class="nav nav-tabs justify-content-end sizeTab">
     <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="{{ url }}producto/index">Index</a>
+      <a class="nav-link" aria-current="page" href="{{ url }}producto/index">Index</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{{ url }}producto/create">Agregar producto</a>
     </li>
   </ul>
-  
-  <div class="row m-0 p-0 justify-content-center mb-3">
-    <div class="col-12 col-lg-4 col-md-5 col-sm-6 row">
-      <div class="mb-3">
-        <label for="id_genre" class="form-label">Id_genre</label>
-        <input type="text" class="form-control" id="id_genre" name="id_genre" value="{{ producto.id_genre }}" aria-describedby="id_genre" readonly />
+
+  <div class="row row-cols-1 justify-content-center mt-3 mb-3">
+    <div class="card mt-5 ms-5 text-center cardSize">
+      <img src="/2daw-clase/assets/img/game.jpg" class="card-img-top" />
+      <div class="card-body">
+        <h5 class="card-title">{{ producto.nombre }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Id_producto: {{ producto.id_producto }}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">Id_genre: {{ producto.id_genre }}</h6>
       </div>
-      <div class="mb-3">
-        <label for="nombre" class="form-label">Nombre</label>
-        <input type="text" class="form-control" id="nombre" name="nombre" value="{{ producto.nombre }}" aria-describedby="nombre" readonly />
-      </div>
-      <div class="mb-3">
-        <label for="cantidad" class="form-label">Cantidad</label>
-        <input type="text" class="form-control" id="cantidad" value="{{ producto.cantidad }}" name="cantidad" aria-describedby="cantidad" readonly />
-      </div>
-      <div class="mb-3">
-        <label for="precio" class="form-label">Precio</label>
-        <input type="number" class="form-control" id="precio" name="precio" value="{{ producto.precio }}" aria-describedby="precio" readonly />
-      </div>
+      <!-- Agrupa en una lista la cantidad y el precio -->
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Cantidad: {{ producto.cantidad }}</li>
+        <li class="list-group-item">Precio: {{ producto.precio }}€</li>
+      </ul>
     </div>
   </div>
 {% endblock %}
