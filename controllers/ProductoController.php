@@ -191,9 +191,11 @@ class ProductoController implements Controller
         // que te hayas logueado)
         $producto = new Producto();
 
+        // Mira si existe género para mostrar solo productos de ese género
         if (isset($_GET['genre'])) {
             $producto->setId_genre($_GET['genre']);
 
+            // Te pone solo los productos de ese género
             echo $GLOBALS["twig"]->render(
                 'products.twig',
                 [

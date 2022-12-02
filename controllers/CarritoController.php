@@ -49,7 +49,6 @@ class CarritoController
                 }
             }
 
-
             // Mi $_SESSION['carrito] contiene un array con los valores seleccionados
             // Solo se añade si no existe previamente el elemento seleccionado de la lista
             // Si no existe, introduce uno nuevo
@@ -158,12 +157,13 @@ class CarritoController
     public static function moreCant()
     {
         if (isset($_SESSION['identity']) && !isset($_SESSION['admin'])) {
-            // Quita todos los productos del usuario iniciado sesión si existe
+
+            // Añade más cantidad a un producto del carrito si existe
             if (isset($_SESSION['carrito'][$_SESSION['identity']->id_usuario])) {
+
                 // Bucle que recorre todos los contenidos del carrito
                 foreach ($_SESSION['carrito'][$_SESSION['identity']->id_usuario] as $indice => $elemento) {
-                    // Si el id cogido es igual al producto del id a eliminar, entonces
-                    // quitará ese elemento en concreto del carro
+                    // Aumenta cantidad si es el elemento correspondiente
                     if ($_GET['id'] == ($elemento['producto_id'])) {
                         $_SESSION['carrito'][$_SESSION['identity']->id_usuario][$indice]['cantidad']++;
                     }
@@ -177,12 +177,13 @@ class CarritoController
     public static function lessCant()
     {
         if (isset($_SESSION['identity']) && !isset($_SESSION['admin'])) {
+
             // Quita todos los productos del usuario iniciado sesión si existe
             if (isset($_SESSION['carrito'][$_SESSION['identity']->id_usuario])) {
+                
                 // Bucle que recorre todos los contenidos del carrito
                 foreach ($_SESSION['carrito'][$_SESSION['identity']->id_usuario] as $indice => $elemento) {
-                    // Si el id cogido es igual al producto del id a eliminar, entonces
-                    // quitará ese elemento en concreto del carro
+                    // Disminuye cantidad si es el elemento correspondiente
                     if ($_GET['id'] == ($elemento['producto_id'])) {
                         $_SESSION['carrito'][$_SESSION['identity']->id_usuario][$indice]['cantidad']--;
                     }
