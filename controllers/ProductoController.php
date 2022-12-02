@@ -9,26 +9,30 @@ class ProductoController implements Controller
      */
     public static function index()
     {
-        // Si es un admin
-        if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
-            $producto = new Producto();
+        $producto = new Producto();
 
-            echo $GLOBALS["twig"]->render(
-                'producto/index.twig',
-                [
-                    'producto' => $producto->findAll(),
-                    'identity' => $_SESSION['identity'],
-                    'url' => url
-                ]
-            );
+        try {
+            // Si es un admin
+            if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
+                echo $GLOBALS["twig"]->render(
+                    'producto/index.twig',
+                    [
+                        'producto' => $producto->findAll(),
+                        'identity' => $_SESSION['identity'],
+                        'url' => url
+                    ]
+                );
 
-            // Si es un cliente (muestra todos los productos)
-        } else if (isset($_SESSION['identity'])) {
-            header('Location: ' . url . 'producto/welcome');
+                // Si es un cliente (muestra todos los productos)
+            } else if (isset($_SESSION['identity'])) {
+                header('Location: ' . url . 'producto/welcome');
 
-            // Si es cualquiera sin registrarse (muestra todos los productos)
-        } else {
-            header('Location: ' . url . 'producto/seePublic');
+                // Si es cualquiera sin registrarse (muestra todos los productos)
+            } else {
+                header('Location: ' . url . 'producto/seePublic');
+            }
+        } catch (\Throwable $th) {
+            echo $th;
         }
     }
 
@@ -37,22 +41,26 @@ class ProductoController implements Controller
      */
     public static function create()
     {
-        if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
-            echo $GLOBALS["twig"]->render(
-                'producto/create.twig',
-                [
-                    'identity' => $_SESSION['identity'],
-                    'url' => url
-                ]
-            );
+        try {
+            if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
+                echo $GLOBALS["twig"]->render(
+                    'producto/create.twig',
+                    [
+                        'identity' => $_SESSION['identity'],
+                        'url' => url
+                    ]
+                );
 
-            // Si no tiene permiso, te dirige al error 403
-        } else if (isset($_SESSION['identity'])) {
-            header('Location: ' . url . 'error/_403');
+                // Si no tiene permiso, te dirige al error 403
+            } else if (isset($_SESSION['identity'])) {
+                header('Location: ' . url . 'error/_403');
 
-            // Te dirige al login
-        } else {
-            header('Location: ' . url . 'auth/login');
+                // Te dirige al login
+            } else {
+                header('Location: ' . url . 'auth/login');
+            }
+        } catch (\Throwable $th) {
+            echo $th;
         }
     }
 
@@ -61,26 +69,31 @@ class ProductoController implements Controller
      */
     public static function show()
     {
-        if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
-            $producto = new Producto();
-            $producto->setId_producto($_GET['id']);
+        $producto = new Producto();
 
-            echo $GLOBALS["twig"]->render(
-                'producto/show.twig',
-                [
-                    'producto' => $producto->findById(),
-                    'identity' => $_SESSION['identity'],
-                    'url' => url
-                ]
-            );
+        try {
+            if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
+                $producto->setId_producto($_GET['id']);
 
-            // Si no tiene permiso, te dirige al error 403
-        } else if (isset($_SESSION['identity'])) {
-            header('Location: ' . url . 'error/_403');
+                echo $GLOBALS["twig"]->render(
+                    'producto/show.twig',
+                    [
+                        'producto' => $producto->findById(),
+                        'identity' => $_SESSION['identity'],
+                        'url' => url
+                    ]
+                );
 
-            // Te dirige al login
-        } else {
-            header('Location: ' . url . 'auth/login');
+                // Si no tiene permiso, te dirige al error 403
+            } else if (isset($_SESSION['identity'])) {
+                header('Location: ' . url . 'error/_403');
+
+                // Te dirige al login
+            } else {
+                header('Location: ' . url . 'auth/login');
+            }
+        } catch (\Throwable $th) {
+            echo $th;
         }
     }
 
@@ -89,26 +102,31 @@ class ProductoController implements Controller
      */
     public static function edit()
     {
-        if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
-            $producto = new Producto();
-            $producto->setId_producto($_GET['id']);
+        $producto = new Producto();
 
-            echo $GLOBALS["twig"]->render(
-                'producto/edit.twig',
-                [
-                    'producto' => $producto->findById(),
-                    'identity' => $_SESSION['identity'],
-                    'url' => url
-                ]
-            );
+        try {
+            if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
+                $producto->setId_producto($_GET['id']);
 
-            // Si no tiene permiso, te dirige al error 403
-        } else if (isset($_SESSION['identity'])) {
-            header('Location: ' . url . 'error/_403');
+                echo $GLOBALS["twig"]->render(
+                    'producto/edit.twig',
+                    [
+                        'producto' => $producto->findById(),
+                        'identity' => $_SESSION['identity'],
+                        'url' => url
+                    ]
+                );
 
-            // Te dirige al login
-        } else {
-            header('Location: ' . url . 'auth/login');
+                // Si no tiene permiso, te dirige al error 403
+            } else if (isset($_SESSION['identity'])) {
+                header('Location: ' . url . 'error/_403');
+
+                // Te dirige al login
+            } else {
+                header('Location: ' . url . 'auth/login');
+            }
+        } catch (\Throwable $th) {
+            echo $th;
         }
     }
 
@@ -117,23 +135,28 @@ class ProductoController implements Controller
      */
     public static function save()
     {
-        if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
-            $producto = new Producto();
-            $producto->setId_genre($_POST['id_genre']);
-            $producto->setNombre($_POST['nombre']);
-            $producto->setCantidad($_POST['cantidad']);
-            $producto->setPrecio(str_replace(",", ".", $_POST['precio']));
-            $producto->save();
+        $producto = new Producto();
 
-            header('Location: ' . url . 'producto/index');
+        try {
+            if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
+                $producto->setId_genre($_POST['id_genre']);
+                $producto->setNombre($_POST['nombre']);
+                $producto->setCantidad($_POST['cantidad']);
+                $producto->setPrecio(str_replace(",", ".", $_POST['precio']));
+                $producto->save();
 
-            // Si no tiene permiso, te dirige al error 403
-        } else if (isset($_SESSION['identity'])) {
-            header('Location: ' . url . 'error/_403');
+                header('Location: ' . url . 'producto/index');
 
-            // Te dirige al login
-        } else {
-            header('Location: ' . url . 'auth/login');
+                // Si no tiene permiso, te dirige al error 403
+            } else if (isset($_SESSION['identity'])) {
+                header('Location: ' . url . 'error/_403');
+
+                // Te dirige al login
+            } else {
+                header('Location: ' . url . 'auth/login');
+            }
+        } catch (\Throwable $th) {
+            echo $th;
         }
     }
 
@@ -142,44 +165,55 @@ class ProductoController implements Controller
      */
     public static function update()
     {
-        if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
-            $producto = new Producto();
-            $producto->setId_producto($_POST['id']);
-            $producto->setId_genre($_POST['id_genre']);
-            $producto->setNombre($_POST['nombre']);
-            $producto->setCantidad($_POST['cantidad']);
-            $producto->setPrecio(str_replace(",", ".", $_POST['precio']));
-            $producto->update();
+        $producto = new Producto();
 
-            header('Location: ' . url . 'producto/index');
+        try {
+            if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
+                $producto->setId_producto($_POST['id']);
+                $producto->setId_genre($_POST['id_genre']);
+                $producto->setNombre($_POST['nombre']);
+                $producto->setCantidad($_POST['cantidad']);
+                $producto->setPrecio(str_replace(",", ".", $_POST['precio']));
+                $producto->update();
 
-            // Si no tiene permiso, te dirige al error 403
-        } else if (isset($_SESSION['identity'])) {
-            header('Location: ' . url . 'error/_403');
+                header('Location: ' . url . 'producto/index');
 
-            // Te dirige al login
-        } else {
-            header('Location: ' . url . 'auth/login');
+                // Si no tiene permiso, te dirige al error 403
+            } else if (isset($_SESSION['identity'])) {
+                header('Location: ' . url . 'error/_403');
+
+                // Te dirige al login
+            } else {
+                header('Location: ' . url . 'auth/login');
+            }
+        } catch (\Throwable $th) {
+            echo $th;
         }
     }
+
     /**
      * Elimina el producto seleccionado
      */
     public static function delete()
     {
-        if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
-            $producto = new Producto();
-            $producto->setId_producto($_GET['id']);
-            $producto->delete();
-            header('Location: ' . url . 'producto/index');
+        $producto = new Producto();
 
-            // Si no tiene permiso, te dirige al error 403
-        } else if (isset($_SESSION['identity'])) {
-            header('Location: ' . url . 'errors/_403');
+        try {
+            if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
+                $producto->setId_producto($_GET['id']);
+                $producto->delete();
+                header('Location: ' . url . 'producto/index');
 
-            // Te dirige al login
-        } else {
-            header('Location: ' . url . 'auth/login');
+                // Si no tiene permiso, te dirige al error 403
+            } else if (isset($_SESSION['identity'])) {
+                header('Location: ' . url . 'errors/_403');
+
+                // Te dirige al login
+            } else {
+                header('Location: ' . url . 'auth/login');
+            }
+        } catch (\Throwable $th) {
+            echo $th;
         }
     }
 
@@ -191,71 +225,82 @@ class ProductoController implements Controller
         // que te hayas logueado)
         $producto = new Producto();
 
-        // Mira si existe género para mostrar solo productos de ese género
-        if (isset($_GET['genre'])) {
-            $producto->setId_genre($_GET['genre']);
-
-            // Te pone solo los productos de ese género
-            echo $GLOBALS["twig"]->render(
-                'products.twig',
-                [
-                    'genre' => $genre->findAll(),
-                    'producto' => $producto->filterByGenre(),
-                    'url' => url
-                ]
-            );
-
-            // Muestra todos los productos
-        } else {
-            echo $GLOBALS["twig"]->render(
-                'products.twig',
-                [
-                    'genre' => $genre->findAll(),
-                    'producto' => $producto->findAllWithGenre(),
-                    'url' => url
-                ]
-            );
-        }
-    }
-
-    // Mira todos los productos (cliente)
-    public static function welcome()
-    {
-        // Si es un cliente (muestra todos los productos)
-        if (isset($_SESSION['identity'])) {
-            $genre = new Genre();
-            $producto = new Producto();
-
-            // Mira si hay id del género de juego. Si no hay te muestra todos los productos.
-            // Si la hay, entonces solo te muestra los productos que se quieran ver
+        try {
+            // Mira si existe género para mostrar solo productos de ese género
             if (isset($_GET['genre'])) {
                 $producto->setId_genre($_GET['genre']);
 
+                // Te pone solo los productos de ese género
                 echo $GLOBALS["twig"]->render(
-                    'producto/welcome.twig',
+                    'products.twig',
                     [
                         'genre' => $genre->findAll(),
                         'producto' => $producto->filterByGenre(),
-                        'identity' => $_SESSION['identity'],
                         'url' => url
                     ]
                 );
 
                 // Muestra todos los productos
             } else {
-
                 echo $GLOBALS["twig"]->render(
-                    'producto/welcome.twig',
+                    'products.twig',
                     [
                         'genre' => $genre->findAll(),
                         'producto' => $producto->findAllWithGenre(),
-                        'identity' => $_SESSION['identity'],
                         'url' => url
                     ]
                 );
             }
-        } else {
-            header('Location: ' . url . 'producto/index');
+        } catch (\Throwable $th) {
+            echo $th;
+        }
+    }
+
+    // Mira todos los productos (cliente)
+    public static function welcome()
+    {
+        $genre = new Genre();
+        $producto = new Producto();
+
+        try {
+            // Si es un cliente (muestra todos los productos)
+            if (isset($_SESSION['identity'])) {
+
+                // Mira si hay id del género de juego. Si no hay te muestra todos los productos.
+                // Si la hay, entonces solo te muestra los productos que se quieran ver
+                if (isset($_GET['genre'])) {
+                    $producto->setId_genre($_GET['genre']);
+
+                    echo $GLOBALS["twig"]->render(
+                        'producto/welcome.twig',
+                        [
+                            'genre' => $genre->findAll(),
+                            'producto' => $producto->filterByGenre(),
+                            'identity' => $_SESSION['identity'],
+                            'url' => url
+                        ]
+                    );
+
+                    // Muestra todos los productos
+                } else {
+
+                    echo $GLOBALS["twig"]->render(
+                        'producto/welcome.twig',
+                        [
+                            'genre' => $genre->findAll(),
+                            'producto' => $producto->findAllWithGenre(),
+                            'identity' => $_SESSION['identity'],
+                            'url' => url
+                        ]
+                    );
+                }
+            } else {
+                header('Location: ' . url . 'producto/index');
+            }
+        } catch (\Throwable $th) {
+            echo $th;
         }
     }
 }
+
+?>

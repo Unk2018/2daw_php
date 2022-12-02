@@ -52,11 +52,17 @@ class Pedido implements Model
     public function findById()
     {
         $db = Database::conectar();
-        $findById = $db->query("SELECT pedido.id_usuario, pedido.fecha, producto.nombre AS nombre_producto, pedido_has_productos.*
-        FROM ((pedido
-        INNER JOIN pedido_has_productos ON pedido.id_pedido = pedido_has_productos.id_pedido)
-        INNER JOIN producto ON producto.id_producto = pedido_has_productos.id_producto)
-        WHERE pedido.id_pedido=$this->id_pedido  AND pedido.id_usuario= $this->usuario;");
+        $findById = "";
+
+        try {
+            $findById = $db->query("SELECT pedido.id_usuario, pedido.fecha, producto.nombre AS nombre_producto, pedido_has_productos.*
+            FROM ((pedido
+            INNER JOIN pedido_has_productos ON pedido.id_pedido = pedido_has_productos.id_pedido)
+            INNER JOIN producto ON producto.id_producto = pedido_has_productos.id_producto)
+            WHERE pedido.id_pedido=$this->id_pedido  AND pedido.id_usuario= $this->usuario;");
+        } catch (\Throwable $th) {
+            echo $th;
+        }
         return $findById;
     }
 
@@ -64,11 +70,17 @@ class Pedido implements Model
     public function findByUser()
     {
         $db = Database::conectar();
-        $findByUser = $db->query("SELECT pedido.fecha, pedido_has_productos.id_pedido, sum(pedido_has_productos.unidades * pedido_has_productos.precio) AS total
-        FROM pedido
-        INNER JOIN pedido_has_productos ON pedido.id_pedido = pedido_has_productos.id_pedido
-        WHERE pedido.id_usuario= $this->usuario
-        GROUP BY id_pedido;");
+        $findByUser = "";
+
+        try {
+            $findByUser = $db->query("SELECT pedido.fecha, pedido_has_productos.id_pedido, sum(pedido_has_productos.unidades * pedido_has_productos.precio) AS total
+            FROM pedido
+            INNER JOIN pedido_has_productos ON pedido.id_pedido = pedido_has_productos.id_pedido
+            WHERE pedido.id_usuario= $this->usuario
+            GROUP BY id_pedido;");
+        } catch (\Throwable $th) {
+            echo $th;
+        }
         return $findByUser;
     }
 
@@ -76,8 +88,13 @@ class Pedido implements Model
     public function save()
     {
         $db = Database::conectar();
-        $save = $db->query("INSERT INTO pedido (id_usuario, fecha) VALUES ('$this->usuario', CURDATE())");
-        return mysqli_insert_id($db); // Te devuelve la id generada por la query
+
+        try {
+            $save = $db->query("INSERT INTO pedido (id_usuario, fecha) VALUES ('$this->usuario', CURDATE())");
+            return mysqli_insert_id($db); // Te devuelve la id generada por la query
+        } catch (\Throwable $th) {
+            echo $th;
+        }
     }
 
     // Actualizar en la base de datos filtrando por id_pedido

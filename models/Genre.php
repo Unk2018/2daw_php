@@ -36,7 +36,13 @@ class Genre implements Model
     public function findAll()
     {
         $db = Database::conectar();
-        $findAll = $db->query("SELECT * FROM genre;");
+        $findAll = "";
+
+        try {
+            $findAll = $db->query("SELECT * FROM genre;");
+        } catch (\Throwable $th) {
+            echo $th;
+        }
         return $findAll;
     }
 
@@ -44,28 +50,48 @@ class Genre implements Model
     public function findById()
     {
         $db = Database::conectar();
-        return $db->query("SELECT * FROM genre WHERE id_genre=$this->id_genre")->fetch_object();
+
+        try {
+            return $db->query("SELECT * FROM genre WHERE id_genre=$this->id_genre")->fetch_object();
+        } catch (\Throwable $th) {
+            echo $th;
+        }
     }
 
     // Insertar en la base de datos
     public function save()
     {
         $db = Database::conectar();
-        $save = $db->query("INSERT INTO genre (tipo) VALUES ('$this->tipo')");
+
+        try {
+            $save = $db->query("INSERT INTO genre (tipo) VALUES ('$this->tipo')");
+        } catch (\Throwable $th) {
+            echo $th;
+        }
     }
 
     // Actualizar en la base de datos filtrando por id_genre
     public function update()
     {
         $db = Database::conectar();
-        $update = $db->query("UPDATE genre SET tipo='$this->tipo' WHERE id_genre=$this->id_genre");
+
+        try {
+            $update = $db->query("UPDATE genre SET tipo='$this->tipo' WHERE id_genre=$this->id_genre");
+        } catch (\Throwable $th) {
+            echo $th;
+        }
     }
 
     // Eliminar en la base de datos filtrando por id_genre
     public function delete()
     {
         $db = Database::conectar();
-        $delete = $db->query("DELETE FROM genre WHERE id_genre=$this->id_genre");
+
+        try {
+            $delete = $db->query("DELETE FROM genre WHERE id_genre=$this->id_genre");
+        } catch (\Throwable $th) {
+            echo $th;
+        }
     }
 }
 

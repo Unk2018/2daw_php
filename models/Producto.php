@@ -68,7 +68,13 @@ class Producto implements Model
     public function findAll()
     {
         $db = Database::conectar();
-        $findAll = $db->query("SELECT * FROM producto;");
+        $findAll = "";
+
+        try {
+            $findAll = $db->query("SELECT * FROM producto;");
+        } catch (\Throwable $th) {
+            echo $th;
+        }
         return $findAll;
     }
 
@@ -76,56 +82,100 @@ class Producto implements Model
     public function findById()
     {
         $db = Database::conectar();
-        return $db->query("SELECT * FROM producto WHERE id_producto=$this->id_producto")->fetch_object();
+
+        try {
+            return $db->query("SELECT * FROM producto WHERE id_producto=$this->id_producto")->fetch_object();
+        } catch (\Throwable $th) {
+            echo $th;
+        }
     }
 
     // Insertar en la base de datos
     public function save()
     {
         $db = Database::conectar();
-        $save = $db->query("INSERT INTO producto (id_genre, nombre, cantidad, precio) VALUES ('$this->id_genre','$this->nombre', '$this->cantidad', '$this->precio')");
+
+        try {
+            $save = $db->query("INSERT INTO producto (id_genre, nombre, cantidad, precio) VALUES ('$this->id_genre','$this->nombre', '$this->cantidad', '$this->precio')");
+        } catch (\Throwable $th) {
+            echo $th;
+        }
     }
 
     // Actualizar en la base de datos filtrando por id_producto
     public function update()
     {
         $db = Database::conectar();
-        $update = $db->query("UPDATE producto SET id_genre='$this->id_genre', nombre='$this->nombre', cantidad='$this->cantidad', precio='$this->precio' WHERE id_producto=$this->id_producto");
+
+        try {
+            $update = $db->query("UPDATE producto SET id_genre='$this->id_genre', nombre='$this->nombre', cantidad='$this->cantidad', precio='$this->precio' WHERE id_producto=$this->id_producto");
+        } catch (\Throwable $th) {
+            echo $th;
+        }
     }
 
     // Actualizar en la base de datos filtrando por id_producto
     public function updateByCantidad()
     {
         $db = Database::conectar();
-        $update = $db->query("UPDATE producto SET cantidad=cantidad-'$this->cantidad' WHERE id_producto=$this->id_producto");
+
+        try {
+            $update = $db->query("UPDATE producto SET cantidad=cantidad-'$this->cantidad' WHERE id_producto=$this->id_producto");
+        } catch (\Throwable $th) {
+            echo $th;
+        }
     }
 
     // Eliminar en la base de datos filtrando por id_producto
     public function delete()
     {
         $db = Database::conectar();
-        $delete = $db->query("DELETE FROM producto WHERE id_producto=$this->id_producto");
+
+        try {
+            $delete = $db->query("DELETE FROM producto WHERE id_producto=$this->id_producto");
+        } catch (\Throwable $th) {
+            echo $th;
+        }
     }
 
     // Eliminar en la base de datos filtrando por género
     public function deleteByGenre()
     {
         $db = Database::conectar();
-        $delete = $db->query("DELETE FROM producto WHERE id_genre=$this->id_genre");
+
+        try {
+            $delete = $db->query("DELETE FROM producto WHERE id_genre=$this->id_genre");
+        } catch (\Throwable $th) {
+            echo $th;
+        }
     }
 
     public function findAllWithGenre()
     {
         $db = Database::conectar();
-        $findWithGenre = $db->query("Select * from producto as p join genre as g where p.id_genre = g.id_genre;");
+        $findWithGenre = "";
+
+        try {
+            $findWithGenre = $db->query("Select * from producto as p join genre as g where p.id_genre = g.id_genre;");
+        } catch (\Throwable $th) {
+            echo $th;
+        }
         return $findWithGenre;
     }
 
     public function filterByGenre()
     {
         $db = Database::conectar();
-        $findWithGenre = $db->query("Select * from producto as p join genre as g 
-        where p.id_genre = g.id_genre and g.id_genre = $this->id_genre;");
+        $findWithGenre = "";
+
+        try {
+            $findWithGenre = $db->query("Select * from producto as p join genre as g 
+            where p.id_genre = g.id_genre and g.id_genre = $this->id_genre;");
+        } catch (\Throwable $th) {
+            echo $th;
+        }
         return $findWithGenre;
     }
 }
+
+?>

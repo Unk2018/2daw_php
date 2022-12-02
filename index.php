@@ -28,42 +28,45 @@ $GLOBALS["twig"];
 
 session_start();
 
-/* Tengo que comprobar si $controller tiene algo */
-if (isset($_GET['controller'])) {
-    // ucfirst() -> UpperCase First
-    $controller = ucfirst($_GET['controller']) . 'Controller'; //____Controller
-
-    /* Una vez he recogido el controlador por URL y lo tengo transformado a mi formato,
-    debo comprobar que existe una clase con ese nombre */
-    if (class_exists($controller)) {
+try {
+    /* Tengo que comprobar si $controller tiene algo */
+    if (isset($_GET['controller'])) {
         // ucfirst() -> UpperCase First
-        $controller_object = new $controller(); // UsersController
+        $controller = ucfirst($_GET['controller']) . 'Controller'; //____Controller
 
-        /* Creo un objeto de la clase $controller y procedo a comprobar el método de la URL */
-        if (isset($_GET['action'])) {
-            /* Recoger la acción de mi controlador y guardarla en una variable */
-            $action = $_GET['action'];
-            $controller_object->$action();
+        /* Una vez he recogido el controlador por URL y lo tengo transformado a mi formato,
+        debo comprobar que existe una clase con ese nombre */
+        if (class_exists($controller)) {
+            // ucfirst() -> UpperCase First
+            $controller_object = new $controller(); // UsersController
+
+            /* Creo un objeto de la clase $controller y procedo a comprobar el método de la URL */
+            if (isset($_GET['action'])) {
+                /* Recoger la acción de mi controlador y guardarla en una variable */
+                $action = $_GET['action'];
+                $controller_object->$action();
+            }
+        } else {
+            /*
+            Error en el caso de no encontrar la clase o no existe
+            Lanzar error 404
+            CAMBIAR CABECERA
+            */
+            ErrorController::_404();
         }
     } else {
-        /*
-        Error en el caso de no encontrar la clase o no existe
-        Lanzar error 404
-        CAMBIAR CABECERA
-        */
-        ErrorController::_404();
+        // Si no existe un controller en mi url, recojo un controlador por defecto
+        // Si no existe una action en mi url, recojo una action por defecto
+        $controller_default = controller_default;
+        $action_default = action_default;
+        $controller = new $controller_default();
+        $controller::$action_default();
+
+        // Mi acción por defecto es lanzar mi index.twig como página de caída
+        //echo $twig->render('index.twig');
     }
-} else {
-    // Si no existe un controller en mi url, recojo un controlador por defecto
-    // Si no existe una action en mi url, recojo una action por defecto
-    $controller_default = controller_default;    
-    $action_default = action_default;
-    $controller = new $controller_default();
-    $controller::$action_default();
-
-    // Mi acción por defecto es lanzar mi index.twig como página de caída
-    //echo $twig->render('index.twig');
+} catch (\Throwable $th) {
+    echo $th;
 }
-
 ?>
 <!---->

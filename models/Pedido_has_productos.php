@@ -57,14 +57,26 @@ class Pedido_has_productos implements Model
     public function findAll()
     {
         $db = Database::conectar();
-        $findAll = $db->query("SELECT * FROM pedido_has_productos;");
+        $findAll = "";
+
+        try {
+            $findAll = $db->query("SELECT * FROM pedido_has_productos;");
+        } catch (\Throwable $th) {
+            echo $th;
+        }
         return $findAll;
     }
 
     public function findById()
     {
         $db = Database::conectar();
-        $sql = "SELECT * FROM pedido_has_productos WHERE id_pedido=$this->pedido;";
+        $sql = "";
+
+        try {
+            $sql = "SELECT * FROM pedido_has_productos WHERE id_pedido=$this->pedido;";
+        } catch (\Throwable $th) {
+            echo $th;
+        }
         return $db->query($sql);
     }
 
@@ -72,7 +84,12 @@ class Pedido_has_productos implements Model
     public function save()
     {
         $db = Database::conectar();
-        $save = $db->query("INSERT INTO pedido_has_productos (id_pedido, id_producto, unidades, precio) VALUES ('$this->pedido', '$this->producto', $this->unidades, $this->precio)");
+
+        try {
+            $save = $db->query("INSERT INTO pedido_has_productos (id_pedido, id_producto, unidades, precio) VALUES ('$this->pedido', '$this->producto', $this->unidades, $this->precio)");
+        } catch (\Throwable $th) {
+            echo $th;
+        }
     }
 
     // Actualizar en la base de datos filtrando por id
