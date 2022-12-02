@@ -87,13 +87,13 @@ class CarritoController
 
     public static function show()
     {
+        $producto = new Producto();
+        $genre = new Genre();
+        
         // Solo entra si es cliente
         if (isset($_SESSION['identity']) && !isset($_SESSION['admin'])) {
             // Solo entra si existe
             if (isset($_SESSION['carrito'][$_SESSION['identity']->id_usuario])) {
-                $producto = new Producto();
-                $genre = new Genre();
-
                 /**
                  * Comprueba si existe el elemento en el carrito
                  */
@@ -107,7 +107,7 @@ class CarritoController
                         unset($_SESSION['carrito'][$_SESSION['identity']->id_usuario][$indice]);
                     }
                 }
-                
+
                 // Asegura de que en el caso de que el carrito del usuario iniciado no exista,
                 // entonces se crea y le asigna un valor por defecto (en este caso es null)
             } else if (!isset($_SESSION['carrito'][$_SESSION['identity']->id_usuario])) {
