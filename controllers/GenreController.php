@@ -155,10 +155,18 @@ class GenreController implements Controller
      */
     public static function delete()
     {
+        $genre = new Genre();
+        $prod = new Producto();
+
         if (isset($_SESSION['identity']) && isset($_SESSION['admin'])) {
-            $genre = new Genre();
             $genre->setId_genre($_GET['id']);
+            $prod->setId_genre($_GET['id']);
+
+            // Se elimina productos primero porque tiene una foreign key que no permite al genre
+            // eliminarse primero
+            $prod->deleteByGenre();
             $genre->delete();
+
             header('Location: ' . url . 'genre/index');
 
             // Si no tiene permiso, te dirige al error 403

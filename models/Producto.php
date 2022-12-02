@@ -107,6 +107,13 @@ class Producto implements Model
         $delete = $db->query("DELETE FROM producto WHERE id_producto=$this->id_producto");
     }
 
+    // Eliminar en la base de datos filtrando por género
+    public function deleteByGenre()
+    {
+        $db = Database::conectar();
+        $delete = $db->query("DELETE FROM producto WHERE id_genre=$this->id_genre");
+    }
+
     public function findAllWithGenre()
     {
         $db = Database::conectar();
