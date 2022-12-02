@@ -31,7 +31,7 @@ session_start();
 /* Tengo que comprobar si $controller tiene algo */
 if (isset($_GET['controller'])) {
     // ucfirst() -> UpperCase First
-    $controller = ucfirst($_GET['controller']) . 'Controller'; //UsersController
+    $controller = ucfirst($_GET['controller']) . 'Controller'; //____Controller
 
     /* Una vez he recogido el controlador por URL y lo tengo transformado a mi formato,
     debo comprobar que existe una clase con ese nombre */
