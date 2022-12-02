@@ -38,7 +38,7 @@
             <td>{{ p.id_genre }}</td>
             <td>{{ p.nombre }}</td>
             <td>{{ p.cantidad }}</td>
-            <td>{{ p.precio }}€</td>
+            <td>{{ p.precio|number_format(2, '.', ',') }}€</td>
             <td>
               <a class="btn btn-success btnSize" href="{{ url }}producto/show&id={{ p.id_producto }}">Ver</a>
               <a class="btn btn-secondary btnSize" href="{{ url }}producto/edit&id={{ p.id_producto }}">Editar</a>

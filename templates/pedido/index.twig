@@ -25,8 +25,9 @@
           <tr>
             <td>{{ loop.index }}</td>
             <td>{{ p.id_pedido }}</td>
-            <!-- Está formateando el número para que tenga solo 2 decimales y que se ponga la ' , ' para
-            definir los decimales -->
+            <!-- Está formateando el número para que tenga solo 2 decimales y que se ponga la ' . ' para
+            definir los decimales y cuando hay más de 3 carácteres de números, pone la ' , ' para
+            diferenciarlos -->
             <td>{{ p.total|number_format(2, '.', ',') }}€</td>
             <td>{{ p.fecha }}</td>
             <td>

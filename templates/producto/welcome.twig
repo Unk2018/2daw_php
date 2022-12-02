@@ -20,7 +20,7 @@
           <!-- Agrupa en una lista la cantidad y el precio -->
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Cantidad: {{ p.cantidad }}</li>
-            <li class="list-group-item">Precio: {{ p.precio }}€</li>
+            <li class="list-group-item">Precio: {{ p.precio|number_format(2, '.', ',') }}€</li>
           </ul>
 
           <div class="text-end">

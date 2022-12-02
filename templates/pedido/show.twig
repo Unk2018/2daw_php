@@ -28,7 +28,7 @@
             <td>{{ loop.index }}</td>
             <td>{{ p.nombre_producto }}</td>
             <td>{{ p.unidades }}</td>
-            <td>{{ p.precio }}€</td>
+            <td>{{ p.precio|number_format(2, '.', ',') }}€</td>
 
             {# Suma que va calculando el total del carro #}
             {% set total = (p.precio * p.unidades) + total %}
@@ -42,7 +42,7 @@
         <td></td>
         <td></td>
         <th>Total:</th>
-        <th>{{ total }}€</th>
+        <th>{{ total|number_format(2, '.', ',') }}€</th>
       </tbody>
     </table>
   </div>

@@ -74,6 +74,24 @@ class CarritoController
         }
     }
 
+    public static function delete()
+    {
+        if (isset($_SESSION['identity']) && !isset($_SESSION['admin'])) {
+            // Quita todos los productos del usuario iniciado sesión si existe
+            if (isset($_SESSION['carrito'][$_SESSION['identity']->id_usuario])) {
+                // Bucle que recorre todos los contenidos del carrito
+                foreach ($_SESSION['carrito'][$_SESSION['identity']->id_usuario] as $indice => $elemento) {
+                    // Si el id cogido es igual al producto del id a eliminar, entonces
+                    // quitará ese elemento en concreto del carro
+                    if ($_GET['id'] == ($elemento['producto_id'])) {
+                        unset($_SESSION['carrito'][$_SESSION['identity']->id_usuario][$indice]);
+                    }
+                }
+            }
+        }
+        header('Location: ' . url . 'carrito/index');
+    }
+
     public static function deleteAll()
     {
         if (isset($_SESSION['identity']) && !isset($_SESSION['admin'])) {
@@ -134,5 +152,48 @@ class CarritoController
         } else {
             header('Location: ' . url . 'auth/login');
         }
+    }
+
+
+    public static function moreCant()
+    {
+        if (isset($_SESSION['identity']) && !isset($_SESSION['admin'])) {
+            // Quita todos los productos del usuario iniciado sesión si existe
+            if (isset($_SESSION['carrito'][$_SESSION['identity']->id_usuario])) {
+                // Bucle que recorre todos los contenidos del carrito
+                foreach ($_SESSION['carrito'][$_SESSION['identity']->id_usuario] as $indice => $elemento) {
+                    // Si el id cogido es igual al producto del id a eliminar, entonces
+                    // quitará ese elemento en concreto del carro
+                    if ($_GET['id'] == ($elemento['producto_id'])) {
+                        $_SESSION['carrito'][$_SESSION['identity']->id_usuario][$indice]['cantidad']++;
+                    }
+                }
+            }
+        }
+        header('Location: ' . url . 'carrito/index');
+    }
+
+
+    public static function lessCant()
+    {
+        if (isset($_SESSION['identity']) && !isset($_SESSION['admin'])) {
+            // Quita todos los productos del usuario iniciado sesión si existe
+            if (isset($_SESSION['carrito'][$_SESSION['identity']->id_usuario])) {
+                // Bucle que recorre todos los contenidos del carrito
+                foreach ($_SESSION['carrito'][$_SESSION['identity']->id_usuario] as $indice => $elemento) {
+                    // Si el id cogido es igual al producto del id a eliminar, entonces
+                    // quitará ese elemento en concreto del carro
+                    if ($_GET['id'] == ($elemento['producto_id'])) {
+                        $_SESSION['carrito'][$_SESSION['identity']->id_usuario][$indice]['cantidad']--;
+                    }
+
+                    // Si hay 0 en cantidad, elimina del carro
+                    if($_SESSION['carrito'][$_SESSION['identity']->id_usuario][$indice]['cantidad'] == 0){
+                        unset($_SESSION['carrito'][$_SESSION['identity']->id_usuario][$indice]);
+                    }
+                }
+            }
+        }
+        header('Location: ' . url . 'carrito/index');
     }
 }
