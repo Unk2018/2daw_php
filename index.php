@@ -44,14 +44,6 @@ if (isset($_GET['controller'])) {
             /* Recoger la acción de mi controlador y guardarla en una variable */
             $action = $_GET['action'];
             $controller_object->$action();
-
-            var_dump($action);
-            var_dump("<br>");
-            var_dump($controller_object);
-            exit;
-            if(function_exists($_GET['action'])){
-
-            }
         }
     } else {
         /*
